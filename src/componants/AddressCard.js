@@ -30,11 +30,13 @@ function AddressCard() {
     const [provinces, setProvinces] = useState([]);
     const [amphures, setAmphures] = useState([]);
     const [tambons, setTambons] = useState([]);
+    const [zipcodes, setZipcodes] = useState([]);
     const [selected, setSelected] = useState({
         province_id: undefined,
         amphure_id: undefined,
         tambon_id: undefined
     });
+
 
     useEffect(() => {
         (() => {
@@ -47,6 +49,40 @@ function AddressCard() {
                 });
         })();
     }, []);
+
+    // find amphure
+    useEffect(() => {
+        if (selected.province_id !== undefined) {
+            const District = provinces.find(
+                (item) => item.id === parseInt(selected.province_id)
+            )
+            if (District !== undefined) {
+                setAmphures(District.amphure)
+            }
+        }
+    });
+    // find tambon
+    useEffect(() => {
+        if (selected.amphure_id !== undefined) {
+            const SubDistrict = amphures.find(
+                (item) => item.id === parseInt(selected.amphure_id)
+            )
+            if (SubDistrict !== undefined) {
+                setTambons(SubDistrict.tambon)
+            }
+        }
+    });
+    // find zipcode
+    useEffect(() => {
+        if (selected.tambon_id !== undefined) {
+            const ZipCode = tambons.find(
+                (item) => item.id === parseInt(selected.tambon_id)
+            )
+            if (ZipCode !== undefined) {
+                setZipcodes(ZipCode)
+            }
+        }
+    });
 
     return (
         <div style={{ marginTop: "2rem" }}>
@@ -130,7 +166,10 @@ function AddressCard() {
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }}
-                                            onChange={e => setSelected(e.target.value)}>
+                                            onChange={e => setSelected({
+                                                ...selected,
+                                                province_id: e.target.value
+                                            })}>
                                             <option ></option>
                                             {provinces.map((item) => {
                                                 return (
@@ -152,12 +191,17 @@ function AddressCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}>
+                                        }}
+                                            onChange={e => setSelected({
+                                                ...selected,
+                                                amphure_id: e.target.value
+                                            })}
+                                        >
                                             <option ></option>
                                             {amphures.map((item) => {
                                                 return (
                                                     <option key={item.id} value={item.id}
-                                                        id='amphure_id'>
+                                                        id='amphures_id'>
                                                         {item.name_th}
                                                     </option>
                                                 )
@@ -174,7 +218,24 @@ function AddressCard() {
                                         ตำบล/แขวง :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}
+                                            onChange={e => setSelected({
+                                                ...selected,
+                                                tambon_id: e.target.value
+                                            })}
+                                        >
+                                            <option ></option>
+                                            {tambons.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id}
+                                                        id='tambons_id'>
+                                                        {item.name_th}
+                                                    </option>
+                                                )
+                                            })}
+                                        </Form.Select>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -184,7 +245,12 @@ function AddressCard() {
                                         รหัสไปรษณีย์ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}>
+                                            <option></option>
+                                            <option id='zipcode'>{zipcodes.zip_code}</option>
+                                        </Form.Select>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -246,10 +312,26 @@ function AddressCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        ตำบล/แขวง :
+                                        จังหวัด :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}
+                                            onChange={e => setSelected({
+                                                ...selected,
+                                                province_id: e.target.value
+                                            })}>
+                                            <option ></option>
+                                            {provinces.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id}
+                                                        id='province_id'>
+                                                        {item.name_th}
+                                                    </option>
+                                                )
+                                            })}
+                                        </Form.Select>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -259,7 +341,24 @@ function AddressCard() {
                                         อำเภอ/เขต :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}
+                                            onChange={e => setSelected({
+                                                ...selected,
+                                                amphure_id: e.target.value
+                                            })}
+                                        >
+                                            <option ></option>
+                                            {amphures.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id}
+                                                        id='amphures_id'>
+                                                        {item.name_th}
+                                                    </option>
+                                                )
+                                            })}
+                                        </Form.Select>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -268,10 +367,27 @@ function AddressCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        จังหวัด :
+                                        ตำบล/แขวง :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}
+                                            onChange={e => setSelected({
+                                                ...selected,
+                                                tambon_id: e.target.value
+                                            })}
+                                        >
+                                            <option ></option>
+                                            {tambons.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id}
+                                                        id='tambons_id'>
+                                                        {item.name_th}
+                                                    </option>
+                                                )
+                                            })}
+                                        </Form.Select>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -281,7 +397,12 @@ function AddressCard() {
                                         รหัสไปรษณีย์ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}>
+                                            <option></option>
+                                            <option id='zipcode'>{zipcodes.zip_code}</option>
+                                        </Form.Select>
                                     </Col>
                                 </Form.Group>
                             </Col>
