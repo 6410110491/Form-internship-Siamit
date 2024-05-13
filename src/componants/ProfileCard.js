@@ -48,9 +48,9 @@ function ProfileCard() {
     }, []);
     return (
         <div>
-            <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem"}}>
+            <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem" }}>
                 <CardActions disableSpacing onClick={handleExpandClick}
-                style={{cursor:"pointer"}}>
+                    style={{ cursor: "pointer" }}>
                     <div style={{ width: "15%", textAlign: 'center' }}>
                         <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                             ข้อมูลส่วนตัว
@@ -142,7 +142,7 @@ function ProfileCard() {
                                         อายุ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="number" required />
+                                        <Form.Control type="number" min={0} required />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกอายุ
                                         </Form.Control.Feedback>
@@ -187,11 +187,11 @@ function ProfileCard() {
                         <Row style={{ marginTop: "3.5rem" }}>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                    <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
+                                    <Form.Label column sm="4" style={{ color: "#1B6BB2" }} >
                                         เลขประจำตัวประชาชน :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="number" min={0} required />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกเลขประจำตัวประชาชน
                                         </Form.Control.Feedback>
@@ -308,8 +308,8 @@ function ProfileCard() {
                                             <option ></option>
                                             {provinces.map((item) => {
                                                 return (
-                                                    <option key={item.id} value={item.id} 
-                                                    id='province_id'>
+                                                    <option key={item.id} value={item.id}
+                                                        id='province_id'>
                                                         {item.name_th}
                                                     </option>
                                                 )
@@ -326,7 +326,7 @@ function ProfileCard() {
                                         ส่วนสูง :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -336,7 +336,7 @@ function ProfileCard() {
                                         น้ำหนัก :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -370,7 +370,7 @@ function ProfileCard() {
                                         โทรศัพท์มือถือ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -380,7 +380,7 @@ function ProfileCard() {
                                         โทรศัพท์บ้าน :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -392,7 +392,7 @@ function ProfileCard() {
                                         โทรศัพท์ที่ทำงาน :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} />
                                     </Col>
                                 </Form.Group>
                             </Col>
