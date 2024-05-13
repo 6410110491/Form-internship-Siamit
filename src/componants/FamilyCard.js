@@ -54,7 +54,7 @@ function FamilyCard() {
                                         บิดา ชื่อ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -64,7 +64,7 @@ function FamilyCard() {
                                         นามสกุล :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -74,7 +74,7 @@ function FamilyCard() {
                                         อายุ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -84,7 +84,7 @@ function FamilyCard() {
                                         อาชีพ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -96,7 +96,7 @@ function FamilyCard() {
                                         มารดา ชื่อ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -106,7 +106,7 @@ function FamilyCard() {
                                         นามสกุล :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -116,7 +116,7 @@ function FamilyCard() {
                                         อายุ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -126,7 +126,7 @@ function FamilyCard() {
                                         อาชีพ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -149,7 +149,7 @@ function FamilyCard() {
                                         เลขที่ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -159,7 +159,7 @@ function FamilyCard() {
                                         หมู่ที่ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -235,7 +235,7 @@ function FamilyCard() {
                                         โทรศัพท์ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -258,7 +258,7 @@ function FamilyCard() {
                                         จำนวน :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -268,7 +268,7 @@ function FamilyCard() {
                                         ชาย :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -278,7 +278,7 @@ function FamilyCard() {
                                         หญิง :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -288,7 +288,7 @@ function FamilyCard() {
                                         ผู้สมัครเป็นคนที่ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -322,7 +322,7 @@ function FamilyCard() {
                                         อายุ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0}  />
                                     </Col>
                                 </Form.Group>
                             </Col>

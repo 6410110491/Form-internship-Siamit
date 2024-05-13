@@ -55,7 +55,7 @@ function GeneralCard() {
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             ทักษะการใช้งานคอมพิวเตอร์ สามารถใช้โปรแกรมอะไรได้บ้าง :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} />
+                                        <Form.Control as="textarea" rows={3} required/>
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
@@ -69,7 +69,7 @@ function GeneralCard() {
                                             1 :
                                         </Form.Label>
                                         <Col sm="11">
-                                            <Form.Control type="text" />
+                                            <Form.Control type="text" required/>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -77,7 +77,7 @@ function GeneralCard() {
                                             2 :
                                         </Form.Label>
                                         <Col sm="11">
-                                            <Form.Control type="text" />
+                                            <Form.Control type="text" required/>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -85,7 +85,7 @@ function GeneralCard() {
                                             3  :
                                         </Form.Label>
                                         <Col sm="11">
-                                            <Form.Control type="text" />
+                                            <Form.Control type="text" required/>
                                         </Col>
                                     </Form.Group>
                                 </Col>
@@ -99,7 +99,7 @@ function GeneralCard() {
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             ทราบข่าวการรับสมัครนักศึกษาฝึกงานจากช่องทางใด :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} />
+                                        <Form.Control as="textarea" rows={3} required/>
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
@@ -115,12 +115,18 @@ function GeneralCard() {
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             เกี่ยวข้องเป็น :
                                         </Form.Label>
-                                        <Form.Control type="text" style={{ width: "95%" }} />
+                                        <Form.Select aria-label="Default select example" style={{ width: "95%"  ,
+                                            cursor: "pointer",
+                                        }}>
+                                            <option>-</option>
+                                            <option value="1">พ่อ/แม่</option>
+                                            <option value="2">พี่/น้อง</option>
+                                            <option value="3">ญาติ</option>
+                                            <option value="4">เพื่อน</option>
+                                        </Form.Select>
                                     </Form.Group>
                                 </Col>
                             </Row>
-
-
                             <Row>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
@@ -128,7 +134,7 @@ function GeneralCard() {
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             สิ่งที่คาดหวังจากการฝึกงาน :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} />
+                                        <Form.Control as="textarea" rows={3} required/>
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
@@ -137,7 +143,7 @@ function GeneralCard() {
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             ถ้าคุณได้ฝึกงานที่นี่ คุณจะช่วยเหลือหรือพัฒนาอะไร ให้กับสถานที่นี่ :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} />
+                                        <Form.Control as="textarea" rows={3} required/>
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -149,7 +155,7 @@ function GeneralCard() {
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             งานอดิเเรก :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} />
+                                        <Form.Control as="textarea" rows={3} required/>
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
@@ -158,7 +164,7 @@ function GeneralCard() {
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             อุปนิสัย :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} />
+                                        <Form.Control as="textarea" rows={3} required/>
                                     </Form.Group>
                                 </Col>
                             </Row>

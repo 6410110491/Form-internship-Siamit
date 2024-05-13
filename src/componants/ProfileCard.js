@@ -304,7 +304,7 @@ function ProfileCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}>
+                                        }} required>
                                             <option ></option>
                                             {provinces.map((item) => {
                                                 return (
@@ -326,7 +326,7 @@ function ProfileCard() {
                                         ส่วนสูง :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -336,7 +336,7 @@ function ProfileCard() {
                                         น้ำหนัก :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -348,7 +348,7 @@ function ProfileCard() {
                                         สัญชาติ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -358,7 +358,7 @@ function ProfileCard() {
                                         ศาสนา :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -370,7 +370,7 @@ function ProfileCard() {
                                         โทรศัพท์มือถือ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required/>
                                     </Col>
                                 </Form.Group>
                             </Col>

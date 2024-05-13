@@ -27,11 +27,8 @@ function EmergencyCard() {
     }));
     return (
         <div>
-            <Card sx={{
-                padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem"
-            }}>
-                <CardActions disableSpacing onClick={handleExpandClick}
-                    style={{ cursor: "pointer" }}>
+            <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem" }}>
+                <CardActions disableSpacing >
                     <div style={{ width: "15%", textAlign: 'center' }}>
                         <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                             กรณีฉุกเฉิน
@@ -39,6 +36,7 @@ function EmergencyCard() {
                     </div>
                     <ExpandMore
                         expand={expanded}
+                        onClick={handleExpandClick}
                         aria-expanded={expanded}
                         aria-label="show more"
                     >
@@ -54,7 +52,7 @@ function EmergencyCard() {
                                         กรณีฉุกเฉินติดต่อที่ ชื่อ - นามสกุล :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -64,7 +62,15 @@ function EmergencyCard() {
                                         ความสัมพันธ์ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                    <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }} required >
+                                            <option>-</option>
+                                            <option value="1">พ่อ</option>
+                                            <option value="2">แม่</option>
+                                            <option value="3">ญาติ</option>
+                                            <option value="4">เพื่อน</option>
+                                        </Form.Select>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -74,7 +80,7 @@ function EmergencyCard() {
                                         ที่อยู่ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -84,7 +90,7 @@ function EmergencyCard() {
                                         โทรศัพท์ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required />
                                     </Col>
                                 </Form.Group>
                             </Col>
