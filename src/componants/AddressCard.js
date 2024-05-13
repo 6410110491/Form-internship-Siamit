@@ -121,7 +121,7 @@ function AddressCard() {
                                         เลขที่ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -131,7 +131,7 @@ function AddressCard() {
                                         หมู่ที่ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -165,7 +165,7 @@ function AddressCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}
+                                        }} required
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 province_id: e.target.value
@@ -191,7 +191,7 @@ function AddressCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}
+                                        }} required
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 amphure_id: e.target.value
@@ -220,7 +220,7 @@ function AddressCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}
+                                        }}required
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 tambon_id: e.target.value
@@ -247,7 +247,7 @@ function AddressCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}>
+                                        }} required>
                                             <option></option>
                                             <option id='zipcode'>{zipcodes.zip_code}</option>
                                         </Form.Select>
@@ -273,7 +273,7 @@ function AddressCard() {
                                         เลขที่ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text" required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -283,7 +283,7 @@ function AddressCard() {
                                         หมู่ที่ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="number" min={0} required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -317,7 +317,7 @@ function AddressCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}
+                                        }} required
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 province_id: e.target.value
@@ -343,7 +343,7 @@ function AddressCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}
+                                        }} required
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 amphure_id: e.target.value
@@ -372,7 +372,7 @@ function AddressCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}
+                                        }} required
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 tambon_id: e.target.value
@@ -399,7 +399,7 @@ function AddressCard() {
                                     <Col sm="8">
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}>
+                                        }} required>
                                             <option></option>
                                             <option id='zipcode'>{zipcodes.zip_code}</option>
                                         </Form.Select>

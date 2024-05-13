@@ -326,7 +326,7 @@ function ProfileCard() {
                                         ส่วนสูง :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="number" min={0} />
+                                        <Form.Control type="number" min={0} required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -336,7 +336,7 @@ function ProfileCard() {
                                         น้ำหนัก :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="number" min={0} />
+                                        <Form.Control type="number" min={0} required/>
                                     </Col>
                                 </Form.Group>
                             </Col>
