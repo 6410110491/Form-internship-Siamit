@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import { Col, Container, Row, Image, Button, Form } from 'react-bootstrap'
 import ProfileCard from './ProfileCard'
 import AddressCard from './AddressCard'
+import EmergencyCard from './EmergencyCard'
+import FamilyCard from './FamilyCard'
+import GeneralCard from './GeneralCard'
+
+import ScrollToTop from 'react-scroll-to-top'
 
 
 
@@ -29,6 +34,11 @@ function Home() {
     return (
         <div style={{ marginBottom: "10rem" }}>
             <div style={{ width: "100%", height: "75px", backgroundColor: "#1B6BB2" }}></div>
+
+            {/* ScroolToTop */}
+            <ScrollToTop smooth color='white' style={{ borderRadius: "20px", 
+            backgroundColor: "#1B6BB2" 
+            }} />
 
             {/* LOGO */}
             <div>
@@ -161,8 +171,8 @@ function Home() {
                                 </Col>
                                 <Col sm={12} md={4} lg={4}>
                                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
-                                        style={{ paddingLeft: '12px', margin:"0" }}>
-                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", margin:"0" }}>
+                                        style={{ paddingLeft: '12px', margin: "0" }}>
+                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", margin: "0" }}>
                                             เป็นระยะเวลาทั้งหมด
                                         </Form.Label>
                                         <Form.Control type="text" />
@@ -186,6 +196,9 @@ function Home() {
                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
                         <ProfileCard />
                         <AddressCard />
+                        <EmergencyCard />
+                        <FamilyCard />
+                        <GeneralCard />
                     </Form>
 
                     <div style={{
@@ -195,29 +208,18 @@ function Home() {
                             width: "100%", marginTop: "3rem",
                             backgroundColor: "#1B6BB2", padding: "0.5remn",
                             maxWidth: "30%", borderRadius: "15px"
-                        }} type="submit" 
-                        onClick={handleSubmit}>
+                        }} type="submit"
+                            onClick={handleSubmit}>
                             ส่งใบสมัคร
                         </Button>
                     </div>
                 </Container>
 
-      </div>
-
-      <div>
-        <div class="card m-b-30" style="margin-top: 1.25rem">
-          {/* Head */}
-          <p style={{ fontSize: "2rem" }}>ประวัติครอบครัว</p>
-          <div style={{ height: "5px", width: "25%", backgroundColor: "rgb(27 107 178)" }}></div>
-
-          {/* ScroolToTop */}
-          <ScrollToTop smooth color='white' style={{ borderRadius: "20px", backgroundColor: "#F3C710" }} />
+            </div>
         </div>
-      </div>
-    </div>
 
 
-  )
+    )
 }
 
 export default Home
