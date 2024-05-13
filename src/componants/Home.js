@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Col, Container, Row, Image, Button, Form } from 'react-bootstrap'
+import { Col, Container, Row, Button, Form } from 'react-bootstrap'
 import ProfileCard from './ProfileCard'
 import AddressCard from './AddressCard'
 import EmergencyCard from './EmergencyCard'
@@ -17,7 +17,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 
 function Home() {
-    const [dueDate, setDueDate] = useState(new Date())
+    const [startdueDate, setStartDueDate] = useState(new Date());
+    const [enddueDate, setEndDueDate] = useState(new Date());
 
     const [validated, setValidated] = useState(false);
 
@@ -30,14 +31,14 @@ function Home() {
 
         setValidated(true);
     };
-
     return (
         <div style={{ marginBottom: "10rem" }}>
             <div style={{ width: "100%", height: "75px", backgroundColor: "#1B6BB2" }}></div>
 
             {/* ScroolToTop */}
-            <ScrollToTop smooth color='white' style={{ borderRadius: "20px", 
-            backgroundColor: "#1B6BB2" 
+            <ScrollToTop smooth color='white' style={{
+                borderRadius: "20px",
+                backgroundColor: "#1B6BB2"
             }} />
 
             {/* LOGO */}
@@ -92,7 +93,8 @@ function Home() {
                                     justifyContent: "center", alignItems: "center"
                                 }}>
                                     <img src={require('../images/blank-profile.jpg')} alt='profile'
-                                        className='logo-img' />
+                                        className='logo-img'
+                                        style={{ borderRadius: "15px" }} />
                                     <div style={{ marginTop: "0.75rem" }}>
                                         <Button variant="success">อัพโหลด</Button>{' '}
                                         <Button variant="danger">ลบ</Button>{' '}
@@ -125,7 +127,7 @@ function Home() {
                                                             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                                                         },
                                                     }}
-                                                    onChange={(dueDate) => setDueDate(dueDate)}
+                                                    onChange={(dueDate) => setStartDueDate(dueDate)}
                                                     // onChange={(dueDate) => setDueDate(dueDate.format('DD-MM-YYYY'))}
                                                     format="DD/MM/YYYY"
                                                     desktopModeMediaQuery="@media (pointer: fine)"
@@ -160,7 +162,7 @@ function Home() {
                                                             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
                                                         }
                                                     }}
-                                                    onChange={(dueDate) => setDueDate(dueDate)}
+                                                    onChange={(dueDate) => setEndDueDate(dueDate)}
                                                     // onChange={(dueDate) => setDueDate(dueDate.format('DD-MM-YYYY'))}
                                                     format="DD/MM/YYYY"
                                                     desktopModeMediaQuery="@media (pointer: fine)"
@@ -171,7 +173,7 @@ function Home() {
                                 </Col>
                                 <Col sm={12} md={4} lg={4}>
                                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
-                                        style={{ paddingLeft: '12px', margin: "0" }}>
+                                        style={{ margin: "0" }}>
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", margin: "0" }}>
                                             เป็นระยะเวลาทั้งหมด
                                         </Form.Label>
@@ -182,7 +184,7 @@ function Home() {
                             <Row>
                                 <Col sm={12} md={12} lg={8}>
                                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
-                                        style={{ paddingLeft: '12px' }}>
+                                        style={{ paddingLeft: '12px', paddingRight: '12px' }}>
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             โปรดระบุตำแหน่งที่ต้องการฝึกงาน
                                         </Form.Label>

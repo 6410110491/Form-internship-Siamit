@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import CardContent from '@mui/material/CardContent';
@@ -33,10 +33,24 @@ function ProfileCard() {
             duration: theme.transitions.duration.shortest,
         }),
     }));
+    const [provinces, setProvinces] = useState([]);
+
+    useEffect(() => {
+        (() => {
+            fetch(
+                "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json"
+            )
+                .then((response) => response.json())
+                .then((result) => {
+                    setProvinces(result);
+                });
+        })();
+    }, []);
     return (
         <div>
-            <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem" }}>
-                <CardActions disableSpacing >
+            <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem"}}>
+                <CardActions disableSpacing onClick={handleExpandClick}
+                style={{cursor:"pointer"}}>
                     <div style={{ width: "15%", textAlign: 'center' }}>
                         <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                             ข้อมูลส่วนตัว
@@ -44,7 +58,6 @@ function ProfileCard() {
                     </div>
                     <ExpandMore
                         expand={expanded}
-                        onClick={handleExpandClick}
                         aria-expanded={expanded}
                         aria-label="show more"
                     >
@@ -142,11 +155,13 @@ function ProfileCard() {
                                         สถานะ :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Select aria-label="Default select example">
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}>
                                             <option>-</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            <option value="1">โสด</option>
+                                            <option value="2">สมรส</option>
+                                            <option value="3">หย่า</option>
                                         </Form.Select>
                                     </Col>
                                 </Form.Group>
@@ -259,7 +274,25 @@ function ProfileCard() {
                                         วัน/เดือน/ปีเกิด :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            <DemoContainer components={['DatePicker']} >
+                                                <DatePicker
+                                                    slotProps={{ textField: { size: 'small' } }}
+                                                    sx={{
+                                                        backgroundColor: "#FFF",
+                                                        borderRadius: "10px",
+                                                        "& MuiInputBase-root": {
+                                                            border: "none",
+                                                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+                                                        }
+                                                    }}
+                                                    onChange={(dueDate) => setDueDate(dueDate)}
+                                                    // onChange={(dueDate) => setDueDate(dueDate.format('DD-MM-YYYY'))}
+                                                    format="DD/MM/YYYY"
+                                                    desktopModeMediaQuery="@media (pointer: fine)"
+                                                />
+                                            </DemoContainer>
+                                        </LocalizationProvider>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -269,7 +302,19 @@ function ProfileCard() {
                                         จังหวัดที่เกิด :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}>
+                                            <option ></option>
+                                            {provinces.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id} 
+                                                    id='province_id'>
+                                                        {item.name_th}
+                                                    </option>
+                                                )
+                                            })}
+                                        </Form.Select>
                                     </Col>
                                 </Form.Group>
                             </Col>

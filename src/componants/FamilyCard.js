@@ -27,8 +27,11 @@ function FamilyCard() {
     }));
     return (
         <div style={{ marginTop: "2rem" }}>
-            <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px" }}>
-                <CardActions disableSpacing >
+            <Card sx={{
+                padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px"
+            }}>
+                <CardActions disableSpacing onClick={handleExpandClick}
+                    style={{ cursor: "pointer" }}>
                     <div style={{ width: "15%", textAlign: 'center' }}>
                         <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                             ประวัติครอบครัว
@@ -36,7 +39,6 @@ function FamilyCard() {
                     </div>
                     <ExpandMore
                         expand={expanded}
-                        onClick={handleExpandClick}
                         aria-expanded={expanded}
                         aria-label="show more"
                     >
@@ -343,4 +345,3 @@ function FamilyCard() {
 }
 
 export default FamilyCard
-                       

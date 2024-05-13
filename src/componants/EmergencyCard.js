@@ -27,8 +27,11 @@ function EmergencyCard() {
     }));
     return (
         <div>
-            <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem" }}>
-                <CardActions disableSpacing >
+            <Card sx={{
+                padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem"
+            }}>
+                <CardActions disableSpacing onClick={handleExpandClick}
+                    style={{ cursor: "pointer" }}>
                     <div style={{ width: "15%", textAlign: 'center' }}>
                         <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                             กรณีฉุกเฉิน
@@ -36,7 +39,6 @@ function EmergencyCard() {
                     </div>
                     <ExpandMore
                         expand={expanded}
-                        onClick={handleExpandClick}
                         aria-expanded={expanded}
                         aria-label="show more"
                     >
