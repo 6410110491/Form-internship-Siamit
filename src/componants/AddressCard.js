@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Col, Row, Form } from 'react-bootstrap';
 
 function AddressCard() {
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(true);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -37,7 +37,7 @@ function AddressCard() {
         tambon_id: undefined
     });
 
-
+    // get province from api
     useEffect(() => {
         (() => {
             fetch(
@@ -50,22 +50,22 @@ function AddressCard() {
         })();
     }, []);
 
-    // find amphure
+    // find district
     useEffect(() => {
         if (selected.province_id !== undefined) {
             const District = provinces.find(
-                (item) => item.id === parseInt(selected.province_id)
+                (item) => item.id === +selected.province_id
             )
             if (District !== undefined) {
                 setAmphures(District.amphure)
             }
         }
     });
-    // find tambon
+    // find sub-district
     useEffect(() => {
         if (selected.amphure_id !== undefined) {
             const SubDistrict = amphures.find(
-                (item) => item.id === parseInt(selected.amphure_id)
+                (item) => item.id === +selected.amphure_id
             )
             if (SubDistrict !== undefined) {
                 setTambons(SubDistrict.tambon)
@@ -76,7 +76,7 @@ function AddressCard() {
     useEffect(() => {
         if (selected.tambon_id !== undefined) {
             const ZipCode = tambons.find(
-                (item) => item.id === parseInt(selected.tambon_id)
+                (item) => item.id === + selected.tambon_id
             )
             if (ZipCode !== undefined) {
                 setZipcodes(ZipCode)
@@ -87,8 +87,7 @@ function AddressCard() {
     return (
         <div style={{ marginTop: "2rem" }}>
             <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px" }}>
-                <CardActions disableSpacing onClick={handleExpandClick}
-                    style={{ cursor: "pointer" }}>
+                <CardActions disableSpacing onClick={handleExpandClick}>
                     <div style={{ width: "15%", textAlign: 'center' }}>
                         <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                             ที่อยู่
@@ -118,20 +117,26 @@ function AddressCard() {
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        เลขที่ :
+                                        เลขที่ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" required/>
+                                    <Col sm="8"  >
+                                        <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกเลขที่
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        หมู่ที่ :
+                                        หมู่ที่ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="number" min={0} required/>
+                                    <Col sm="8"  >
+                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกหมู่ที่
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -160,9 +165,9 @@ function AddressCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        จังหวัด :
+                                        จังหวัด <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }} required
@@ -180,15 +185,18 @@ function AddressCard() {
                                                 )
                                             })}
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกจังหวัด
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        อำเภอ/เขต :
+                                        อำเภอ/เขต <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }} required
@@ -207,6 +215,9 @@ function AddressCard() {
                                                 )
                                             })}
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกอำเภอ/เขต
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -215,12 +226,12 @@ function AddressCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        ตำบล/แขวง :
+                                        ตำบล/แขวง <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
-                                        }}required
+                                        }} required
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 tambon_id: e.target.value
@@ -236,21 +247,27 @@ function AddressCard() {
                                                 )
                                             })}
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกตำบล/แขวง
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        รหัสไปรษณีย์ :
+                                        รหัสไปรษณีย์ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }} required>
                                             <option></option>
                                             <option id='zipcode'>{zipcodes.zip_code}</option>
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกรหัสไปรษณีย์
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -270,27 +287,33 @@ function AddressCard() {
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        เลขที่ :
+                                        เลขที่ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" required/>
+                                    <Col sm="8"  >
+                                        <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกเลขที่
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        หมู่ที่ :
+                                        หมู่ที่ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="number" min={0} required/>
+                                    <Col sm="8"  >
+                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกหมู่ที่
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
-                                        ตรอก/ซอย :
+                                        ตรอก/ซอย  :
                                     </Form.Label>
                                     <Col sm="8">
                                         <Form.Control type="text" />
@@ -312,9 +335,9 @@ function AddressCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        จังหวัด :
+                                        จังหวัด <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }} required
@@ -332,15 +355,18 @@ function AddressCard() {
                                                 )
                                             })}
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกจังหวัด
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        อำเภอ/เขต :
+                                        อำเภอ/เขต <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }} required
@@ -359,6 +385,9 @@ function AddressCard() {
                                                 )
                                             })}
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกอำเภอ/เขต
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -367,9 +396,9 @@ function AddressCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        ตำบล/แขวง :
+                                        ตำบล/แขวง <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }} required
@@ -388,21 +417,27 @@ function AddressCard() {
                                                 )
                                             })}
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกตำบล/แขวง
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        รหัสไปรษณีย์ :
+                                        รหัสไปรษณีย์ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }} required>
                                             <option></option>
                                             <option id='zipcode'>{zipcodes.zip_code}</option>
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกรหัสไปรษณีย์
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>

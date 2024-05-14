@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Col, Row, Form } from 'react-bootstrap';
 
 function EmergencyCard() {
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(true);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -28,7 +28,7 @@ function EmergencyCard() {
     return (
         <div>
             <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem" }}>
-                <CardActions disableSpacing >
+                <CardActions disableSpacing onClick={handleExpandClick} >
                     <div style={{ width: "15%", textAlign: 'center' }}>
                         <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                             กรณีฉุกเฉิน
@@ -36,7 +36,6 @@ function EmergencyCard() {
                     </div>
                     <ExpandMore
                         expand={expanded}
-                        onClick={handleExpandClick}
                         aria-expanded={expanded}
                         aria-label="show more"
                     >
@@ -49,10 +48,13 @@ function EmergencyCard() {
                             <Col sm={12} md={12} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
-                                        กรณีฉุกเฉินติดต่อที่ ชื่อ - นามสกุล :
+                                        กรณีฉุกเฉินติดต่อที่ ชื่อ - นามสกุล <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกชื่อ - นามสกุล
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -62,7 +64,7 @@ function EmergencyCard() {
                                         ความสัมพันธ์ :
                                     </Form.Label>
                                     <Col sm="8">
-                                    <Form.Select aria-label="Default select example" style={{
+                                        <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }} required >
                                             <option>-</option>
@@ -77,20 +79,26 @@ function EmergencyCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
-                                        ที่อยู่ :
+                                        ที่อยู่ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกที่อยู่
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        โทรศัพท์ :
+                                        โทรศัพท์ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกเบอร์โทรศัพท์
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>

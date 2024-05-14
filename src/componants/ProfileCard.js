@@ -15,7 +15,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 function ProfileCard() {
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(true);
     const [dueDate, setDueDate] = useState(new Date())
 
 
@@ -49,8 +49,7 @@ function ProfileCard() {
     return (
         <div>
             <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem" }}>
-                <CardActions disableSpacing onClick={handleExpandClick}
-                    style={{ cursor: "pointer" }}>
+                <CardActions disableSpacing onClick={handleExpandClick}>
                     <div style={{ width: "15%", textAlign: 'center' }}>
                         <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                             ข้อมูลส่วนตัว
@@ -70,9 +69,9 @@ function ProfileCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        ชื่อ :
+                                        ชื่อ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกชื่อ
@@ -83,9 +82,9 @@ function ProfileCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextSurname">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        นามสกุล :
+                                        นามสกุล <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกนามสกุล
@@ -98,9 +97,9 @@ function ProfileCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        Name :
+                                        Name <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
                                         <Form.Control.Feedback type="invalid">
                                             Please enter your name
@@ -111,9 +110,9 @@ function ProfileCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextSurname">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        Surname :
+                                        Surname <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
                                         <Form.Control.Feedback type="invalid">
                                             Please enter your surname
@@ -126,9 +125,9 @@ function ProfileCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        ชื่อเล่น :
+                                        ชื่อเล่น <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกชื่อเล่น
@@ -139,9 +138,9 @@ function ProfileCard() {
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        อายุ :
+                                        อายุ <span>*</span>  :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกอายุ
@@ -155,6 +154,7 @@ function ProfileCard() {
                                         สถานะ :
                                     </Form.Label>
                                     <Col sm="8">
+
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }}>
@@ -174,6 +174,7 @@ function ProfileCard() {
                                         โรคประจำตัว :
                                     </Form.Label>
                                     <Col sm="8">
+
                                         <Form.Control type="text" />
                                     </Col>
                                 </Form.Group>
@@ -188,9 +189,9 @@ function ProfileCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }} >
-                                        เลขประจำตัวประชาชน :
+                                        เลขประจำตัวประชาชน <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกเลขประจำตัวประชาชน
@@ -204,6 +205,7 @@ function ProfileCard() {
                                         ออกให้ ณ :
                                     </Form.Label>
                                     <Col sm="8">
+
                                         <Form.Control type="text" />
                                     </Col>
                                 </Form.Group>
@@ -244,6 +246,7 @@ function ProfileCard() {
                                         หมดอายุ :
                                     </Form.Label>
                                     <Col sm="8">
+
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                                             <DemoContainer components={['DatePicker']} >
                                                 <DatePicker
@@ -267,7 +270,7 @@ function ProfileCard() {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row style={{ marginTop: "1.5rem", marginBottom: "1rem" }}>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
@@ -297,11 +300,11 @@ function ProfileCard() {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3 form-province" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
-                                        จังหวัดที่เกิด :
+                                        จังหวัดที่เกิด <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }} required>
@@ -315,6 +318,9 @@ function ProfileCard() {
                                                 )
                                             })}
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกจังหวัดที่เกิด
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -323,20 +329,26 @@ function ProfileCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        ส่วนสูง :
+                                        ส่วนสูง <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="number" min={0} required/>
+                                    <Col sm="8"  >
+                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกส่วนสูง
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        น้ำหนัก :
+                                        น้ำหนัก <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="number" min={0} required/>
+                                    <Col sm="8"  >
+                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกน้ำหนัก
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -345,20 +357,26 @@ function ProfileCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        สัญชาติ :
+                                        สัญชาติ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" required/>
+                                    <Col sm="8"  >
+                                        <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกสัญชาติ
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        ศาสนา :
+                                        ศาสนา <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" required/>
+                                    <Col sm="8"  >
+                                        <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกศาสนา
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -367,10 +385,13 @@ function ProfileCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
-                                        โทรศัพท์มือถือ :
+                                        โทรศัพท์มือถือ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="number" min={0} required/>
+                                    <Col sm="8"  >
+                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกเบอร์โทรศัพท์มือถือ
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -380,7 +401,8 @@ function ProfileCard() {
                                         โทรศัพท์บ้าน :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="number" min={0} />
+
+                                        <Form.Control type="number" min={0}  maxLength={0}/>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -392,6 +414,7 @@ function ProfileCard() {
                                         โทรศัพท์ที่ทำงาน :
                                     </Form.Label>
                                     <Col sm="8">
+
                                         <Form.Control type="number" min={0} />
                                     </Col>
                                 </Form.Group>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import CardContent from '@mui/material/CardContent';
@@ -6,10 +6,10 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Col, Row, Form } from 'react-bootstrap';
+import { Col, Row, Form, Button } from 'react-bootstrap';
 
 function FamilyCard() {
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(true);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -25,13 +25,79 @@ function FamilyCard() {
             duration: theme.transitions.duration.shortest,
         }),
     }));
+
+    const [numForms, setNumForms] = useState(1);
+
+    const addForm = () => {
+        setNumForms(numForms + 1);
+    };
+
+    const removeForm = () => {
+        setNumForms(numForms - 1);
+    };
+
+    const [provinces, setProvinces] = useState([]);
+    const [amphures, setAmphures] = useState([]);
+    const [tambons, setTambons] = useState([]);
+    const [zipcodes, setZipcodes] = useState([]);
+    const [selected, setSelected] = useState({
+        province_id: undefined,
+        amphure_id: undefined,
+        tambon_id: undefined
+    });
+
+    // get province from api
+    useEffect(() => {
+        (() => {
+            fetch(
+                "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json"
+            )
+                .then((response) => response.json())
+                .then((result) => {
+                    setProvinces(result);
+                });
+        })();
+    }, []);
+
+    // find district
+    useEffect(() => {
+        if (selected.province_id !== undefined) {
+            const District = provinces.find(
+                (item) => item.id === +selected.province_id
+            )
+            if (District !== undefined) {
+                setAmphures(District.amphure)
+            }
+        }
+    });
+    // find sub-district
+    useEffect(() => {
+        if (selected.amphure_id !== undefined) {
+            const SubDistrict = amphures.find(
+                (item) => item.id === +selected.amphure_id
+            )
+            if (SubDistrict !== undefined) {
+                setTambons(SubDistrict.tambon)
+            }
+        }
+    });
+    // find zipcode
+    useEffect(() => {
+        if (selected.tambon_id !== undefined) {
+            const ZipCode = tambons.find(
+                (item) => item.id === + selected.tambon_id
+            )
+            if (ZipCode !== undefined) {
+                setZipcodes(ZipCode)
+            }
+        }
+    });
     return (
         <div style={{ marginTop: "2rem" }}>
             <Card sx={{
                 padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px"
             }}>
-                <CardActions disableSpacing onClick={handleExpandClick}
-                    style={{ cursor: "pointer" }}>
+                <CardActions disableSpacing onClick={handleExpandClick}>
                     <div style={{ width: "15%", textAlign: 'center' }}>
                         <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                             ประวัติครอบครัว
@@ -51,40 +117,52 @@ function FamilyCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        บิดา ชื่อ :
+                                        บิดา ชื่อ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกชื่อบิดา
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        นามสกุล :
+                                        นามสกุล <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกนามสกุลบิดา
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
-                                        อายุ :
+                                        อายุ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกอายุบิดา
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        อาชีพ :
+                                        อาชีพ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกอาชีพบิดา
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -93,40 +171,52 @@ function FamilyCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        มารดา ชื่อ :
+                                        มารดา ชื่อ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกชื่อมารดา
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        นามสกุล :
+                                        นามสกุล <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกนามสกุลมารดา
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
-                                        อายุ :
+                                        อายุ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกอายุมารดา
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        อาชีพ :
+                                        อาชีพ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกอาชีพมารดา
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -146,27 +236,33 @@ function FamilyCard() {
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        เลขที่ :
+                                        เลขที่ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="text" required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกเลขที่
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        หมู่ที่ :
+                                        หมู่ที่ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกหมู่ที่
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
-                                        ตรอก/ซอย :
+                                        ตรอก/ซอย  :
                                     </Form.Label>
                                     <Col sm="8">
                                         <Form.Control type="text" />
@@ -188,10 +284,29 @@ function FamilyCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        ตำบล/แขวง :
+                                        จังหวัด :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" />
+                                    <Col sm="8"  >
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}
+                                            onChange={e => setSelected({
+                                                ...selected,
+                                                province_id: e.target.value
+                                            })}>
+                                            <option ></option>
+                                            {provinces.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id}
+                                                        id='province_id'>
+                                                        {item.name_th}
+                                                    </option>
+                                                )
+                                            })}
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกจังหวัด
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -200,8 +315,28 @@ function FamilyCard() {
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         อำเภอ/เขต :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" />
+                                    <Col sm="8"  >
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}
+                                            onChange={e => setSelected({
+                                                ...selected,
+                                                amphure_id: e.target.value
+                                            })}
+                                        >
+                                            <option ></option>
+                                            {amphures.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id}
+                                                        id='amphures_id'>
+                                                        {item.name_th}
+                                                    </option>
+                                                )
+                                            })}
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกอำเภอ/เขต
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -210,10 +345,30 @@ function FamilyCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        จังหวัด :
+                                        ตำบล/แขวง :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" />
+                                    <Col sm="8"  >
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }}
+                                            onChange={e => setSelected({
+                                                ...selected,
+                                                tambon_id: e.target.value
+                                            })}
+                                        >
+                                            <option ></option>
+                                            {tambons.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id}
+                                                        id='tambons_id'>
+                                                        {item.name_th}
+                                                    </option>
+                                                )
+                                            })}
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกตำบล/แขวง
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -222,8 +377,16 @@ function FamilyCard() {
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         รหัสไปรษณีย์ :
                                     </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" />
+                                    <Col sm="8"  >
+                                        <Form.Select aria-label="Default select example" style={{
+                                            cursor: "pointer",
+                                        }} >
+                                            <option></option>
+                                            <option id='zipcode'>{zipcodes.zip_code}</option>
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกรหัสไปรษณีย์
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -232,10 +395,13 @@ function FamilyCard() {
                             <Col sm={12} md={6} lg={6}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        โทรศัพท์ :
+                                        โทรศัพท์ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกเบอร์โทรศัพท์
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -255,88 +421,126 @@ function FamilyCard() {
                             <Col sm={6} md={6} lg={3}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        จำนวน :
+                                        จำนวน <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกจำนวนพี่น้อง
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={6} lg={2}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        ชาย :
+                                        ชาย <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกจำนวนพี่น้องผู้ชาย
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={6} lg={2}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        หญิง :
+                                        หญิง <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกจำนวนพี่น้องผู้หญิง
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={6} lg={5}>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
-                                        ผู้สมัครเป็นคนที่ :
+                                        ผู้สมัครเป็นคนที่ <span>*</span> :
                                     </Form.Label>
-                                    <Col sm="8">
+                                    <Col sm="8"  >
                                         <Form.Control type="number" min={0} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกเป็นคนที่เท่าไหร่
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                    <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        คนที่ 1 ชื่อ :
-                                    </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" />
-                                    </Col>
-                                </Form.Group>
-                            </Col>
-                            <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                    <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        นามสกุล :
-                                    </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" />
-                                    </Col>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                    <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        อายุ :
-                                    </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="number" min={0}  />
-                                    </Col>
-                                </Form.Group>
-                            </Col>
-                            <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                    <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                        อาชีพ :
-                                    </Form.Label>
-                                    <Col sm="8">
-                                        <Form.Control type="text" />
-                                    </Col>
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                        <div>
+                            <div style={{
+                                display: "flex", justifyContent: "flex-end", marginBottom: "1rem"
+                            }}>
+
+                                <Button style={{
+                                    fontSize: "1.5rem", backgroundColor: "#1B6BB2",
+                                    marginRight: "1rem", padding: "0 1rem 0 1rem"
+                                }}
+                                    onClick={addForm}>
+                                    +
+                                </Button>
+                                <Button style={{
+                                    fontSize: "1.5rem", backgroundColor: "#1B6BB2",
+                                    padding: "0 1rem 0 1rem"
+                                }}
+                                    onClick={removeForm}>
+                                    -
+                                </Button>
+
+                            </div>
+                            {[...Array(numForms)].map((_, index) => (
+                                <div key={index}>
+                                    <Row>
+                                        <Col sm={12} md={6} lg={6}>
+                                            <Form.Group as={Row} className="mb-3" controlId={`formPlaintextPassword-name-${index}`}>
+                                                <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
+                                                    คนที่ {index + 1} ชื่อ :
+                                                </Form.Label>
+                                                <Col sm="8">
+                                                    <Form.Control type="text" />
+                                                </Col>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col sm={12} md={6} lg={6}>
+                                            <Form.Group as={Row} className="mb-3" controlId={`formPlaintextPassword-lastname-${index}`}>
+                                                <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
+                                                    นามสกุล :
+                                                </Form.Label>
+                                                <Col sm="8">
+                                                    <Form.Control type="text" />
+                                                </Col>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm={6} md={3} lg={3}>
+                                            <Form.Group as={Row} className="mb-3" controlId={`formPlaintextPassword-age-${index}`}>
+                                                <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
+                                                    อายุ :
+                                                </Form.Label>
+                                                <Col sm="8">
+                                                    <Form.Control type="number" min={0} />
+                                                </Col>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col sm={6} md={3} lg={3}>
+                                            <Form.Group as={Row} className="mb-3" controlId={`formPlaintextPassword-job-${index}`}>
+                                                <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
+                                                    อาชีพ :
+                                                </Form.Label>
+                                                <Col sm="8">
+                                                    <Form.Control type="text" />
+                                                </Col>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                </div>
+                            ))}
+                        </div>
                     </CardContent>
                 </Collapse>
             </Card>

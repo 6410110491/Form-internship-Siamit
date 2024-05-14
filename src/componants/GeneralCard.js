@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Col, Row, Form } from 'react-bootstrap';
 
 function GeneralCard() {
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(true);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -31,8 +31,7 @@ function GeneralCard() {
                 <Card sx={{
                     padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem"
                 }}>
-                    <CardActions disableSpacing onClick={handleExpandClick}
-                        style={{ cursor: "pointer" }}>
+                    <CardActions disableSpacing onClick={handleExpandClick}>
                         <div style={{ width: "15%", textAlign: 'center' }}>
                             <p style={{ color: "#1B6BB2", fontWeight: "initial", borderBottom: "2px solid #1B6BB2" }}>
                                 ข้อมูลทั่วไป
@@ -50,42 +49,50 @@ function GeneralCard() {
                         <CardContent>
                             <Row>
                                 <Col sm={12} md={12} lg={6}>
-                                    <Form.Group className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
-                                            ทักษะการใช้งานคอมพิวเตอร์ สามารถใช้โปรแกรมอะไรได้บ้าง :
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
+                                            ทักษะการใช้งานคอมพิวเตอร์ สามารถใช้โปรแกรมอะไรได้บ้าง  <span>*</span> :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} required/>
+                                        <Form.Control as="textarea" rows={3} required />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกทักษะการใช้งานคอมพิวเตอร์
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
-                                            จุดมุ่งหมายงานอาชีพ (ระบุสายงาน/อาชีพที่สนใจ) :
+                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
+                                            จุดมุ่งหมายงานอาชีพ (ระบุสายงาน/อาชีพที่สนใจ) <span>*</span> :
                                         </Form.Label>
                                     </Form.Group>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
+                                    >
                                         <Form.Label column sm="1" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             1 :
                                         </Form.Label>
                                         <Col sm="11">
-                                            <Form.Control type="text" required/>
+                                            <Form.Control type="text" required />
                                         </Col>
                                     </Form.Group>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
+                                    >
                                         <Form.Label column sm="1" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             2 :
                                         </Form.Label>
                                         <Col sm="11">
-                                            <Form.Control type="text" required/>
+                                            <Form.Control type="text" required />
                                         </Col>
                                     </Form.Group>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
+                                    >
                                         <Form.Label column sm="1" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             3  :
                                         </Form.Label>
                                         <Col sm="11">
-                                            <Form.Control type="text" required/>
+                                            <Form.Control type="text" required />
+                                            <Form.Control.Feedback type="invalid">
+                                                กรุณากรอกจุดมุ่งหมายงานอาชีพ
+                                            </Form.Control.Feedback>
                                         </Col>
                                     </Form.Group>
                                 </Col>
@@ -96,16 +103,20 @@ function GeneralCard() {
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
                                         controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
-                                            ทราบข่าวการรับสมัครนักศึกษาฝึกงานจากช่องทางใด :
+                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
+                                            ทราบข่าวการรับสมัครนักศึกษาฝึกงานจากช่องทางใด <span>*</span> :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} required/>
+                                        <Form.Control as="textarea" rows={3} required
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกช่องทางการรับสมัครนักศึกษาฝึกงาน
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
                                         style={{ display: "flex", justifyContent: "center" }}>
-                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
+                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             มีผู้ที่รู้จักในบริษัทหรือไม่ ถ้ามี (โปรดระบุ) ชื่อ :
                                         </Form.Label>
                                         <Form.Control type="text" style={{ width: "95%" }} />
@@ -115,7 +126,8 @@ function GeneralCard() {
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             เกี่ยวข้องเป็น :
                                         </Form.Label>
-                                        <Form.Select aria-label="Default select example" style={{ width: "95%"  ,
+                                        <Form.Select aria-label="Default select example" style={{
+                                            width: "95%",
                                             cursor: "pointer",
                                         }}>
                                             <option>-</option>
@@ -131,19 +143,27 @@ function GeneralCard() {
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
                                         controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
-                                            สิ่งที่คาดหวังจากการฝึกงาน :
+                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
+                                            สิ่งที่คาดหวังจากการฝึกงาน <span>*</span> :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} required/>
+                                        <Form.Control as="textarea" rows={3} required
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกสิ่งที่คาดหวังจากการฝึกงาน
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
                                         controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
-                                            ถ้าคุณได้ฝึกงานที่นี่ คุณจะช่วยเหลือหรือพัฒนาอะไร ให้กับสถานที่นี่ :
+                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
+                                            ถ้าคุณได้ฝึกงานที่นี่ คุณจะช่วยเหลือหรือพัฒนาอะไร ให้กับสถานที่นี่ <span>*</span> :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} required/>
+                                        <Form.Control as="textarea" rows={3} required
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกสิ่งที่จะช่วยเหลือหรือพัฒนาให้กับสถานที่นี่
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -152,19 +172,27 @@ function GeneralCard() {
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
                                         controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
-                                            งานอดิเเรก :
+                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
+                                            งานอดิเเรก <span>*</span> :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} required/>
+                                        <Form.Control as="textarea" rows={3} required
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกงานอดิเรก
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
                                         controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
-                                            อุปนิสัย :
+                                        <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
+                                            อุปนิสัย <span>*</span> :
                                         </Form.Label>
-                                        <Form.Control as="textarea" rows={3} required/>
+                                        <Form.Control as="textarea" rows={3} required
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณากรอกอุปนิสัย
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                             </Row>

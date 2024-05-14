@@ -18,27 +18,6 @@ code {
   font-weight: 300;
 }
 
-.MuiFormControl-root.MuiTextField-root.css-11gc0et-MuiFormControl-root-MuiTextField-root {
-  min-width: 0;
-  width: 100%;
-}
-
-.MuiFormControl-root.MuiTextField-root.css-xtpn3w-MuiFormControl-root-MuiTextField-root {
-  min-width: 0;
-  width: 100%;
-}
-
-/* @media screen and (max-width: 400px) {
-
-  .MuiStack-root,
-  .MuiFormControl-root,
-  .MuiInputBase-root,
-  .MuiOutlinedInput-root .MuiTextField-root {
-    width: 130px;
-  }
-
-} */
-
 @media screen and (max-width: 576px) {
   .logo-img {
     width: 100px;
@@ -62,9 +41,12 @@ code {
   p {
     font-size: 0.8rem;
   }
+}
 
-  
-
+@media screen and (max-width: 768px) {
+  .form-province {
+    margin-top: 2rem;
+  }
 
 }
 
@@ -114,6 +96,7 @@ code {
   p {
     font-size: 1.1rem;
   }
+
 }
 
 @media screen and (min-width: 992px) {
@@ -164,4 +147,35 @@ code {
   }
 
 
+}
+
+.MuiFormControl-root.MuiTextField-root.css-11gc0et-MuiFormControl-root-MuiTextField-root {
+  min-width: 0;
+  width: 100%;
+}
+
+.MuiFormControl-root.MuiTextField-root.css-xtpn3w-MuiFormControl-root-MuiTextField-root {
+  min-width: 0;
+  width: 100%;
+}
+
+span {
+  color: red;
+  font-size: 1.3rem;
+}
+
+.form-control,
+.form-select {
+  border-color: rgba(0, 0, 0, 0.23);
+}
+
+.MuiCardActions-root:hover {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.form-control:hover,
+.form-select:hover {
+  border-color: rgba(0, 0, 0, 0.80);
 }
