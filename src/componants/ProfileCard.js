@@ -13,10 +13,58 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 
-function ProfileCard() {
-    const [expanded, setExpanded] = React.useState(true);
-    const [dueDate, setDueDate] = useState(new Date())
+function ProfileCard({ expanded, setExpanded }) {
+    const [giveDate, setGiveDate] = useState(new Date())
+    const [expireDate, setExpireDate] = useState(new Date())
+    const [birthDate, setBirthDate] = useState(new Date())
+
+    const [selected, setSelected] = useState({
+        province_id: undefined,
+        amphure_id: undefined,
+        tambon_id: undefined,
+    });
+
+
+    const [form, setForm] = useState({
+        ProNameTH: "",
+        ProSurNameTH: "",
+        ProNameEN: "",
+        ProSurNameEN: "",
+        ProNickname: "",
+        ProAge: "",
+        ProStatus: "",
+        ProDisease: "",
+
+        ProID: "",
+        ProPlace: "",
+        ProGivenDate: "",
+        ProExpireDate: "",
+        ProBirthDate: "",
+        ProProvince: "",
+        ProHeight: "",
+        ProWeight: "",
+        ProNationality: "",
+        ProReligion: "",
+        ProMobile: "",
+        ProHomephone: "",
+        ProWorkphone: "",
+    });
+
+    const handleChangeGiveDate = (date) => {
+        setGiveDate(date);
+        setForm({ ...form, ProGivenDate: date })
+    };
+
+    const handleChangeExpireDate = (date) => {
+        setExpireDate(date);
+        setForm({ ...form, ProExpireDate: date })
+    };
+    const handleChangeBirthDate = (date) => {
+        setBirthDate(date);
+        setForm({ ...form, ProBirthDate: date })
+    };
 
 
     const handleExpandClick = () => {
@@ -72,7 +120,9 @@ function ProfileCard() {
                                         ชื่อ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            onChange={e => setForm({ ...form, ProNameTH: e.target.value })}
+                                            value={form.ProNameTH} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกชื่อ
                                         </Form.Control.Feedback>
@@ -85,7 +135,9 @@ function ProfileCard() {
                                         นามสกุล <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            onChange={e => setForm({ ...form, ProSurNameTH: e.target.value })}
+                                            value={form.ProSurNameTH} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกนามสกุล
                                         </Form.Control.Feedback>
@@ -100,7 +152,9 @@ function ProfileCard() {
                                         Name <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            onChange={e => setForm({ ...form, ProNameEN: e.target.value })}
+                                            value={form.ProNameEN} />
                                         <Form.Control.Feedback type="invalid">
                                             Please enter your name
                                         </Form.Control.Feedback>
@@ -113,7 +167,9 @@ function ProfileCard() {
                                         Surname <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            onChange={e => setForm({ ...form, ProSurNameEN: e.target.value })}
+                                            value={form.ProSurNameEN} />
                                         <Form.Control.Feedback type="invalid">
                                             Please enter your surname
                                         </Form.Control.Feedback>
@@ -128,7 +184,9 @@ function ProfileCard() {
                                         ชื่อเล่น <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            onChange={e => setForm({ ...form, ProNickname: e.target.value })}
+                                            value={form.ProNickname} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกชื่อเล่น
                                         </Form.Control.Feedback>
@@ -141,7 +199,9 @@ function ProfileCard() {
                                         อายุ <span>*</span>  :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            onChange={e => setForm({ ...form, ProAge: e.target.value })}
+                                            value={form.ProAge} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกอายุ
                                         </Form.Control.Feedback>
@@ -155,13 +215,16 @@ function ProfileCard() {
                                     </Form.Label>
                                     <Col sm="8">
 
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }}>
+                                        <Form.Select aria-label="Default select example"
+                                            onChange={e => setForm({ ...form, ProStatus: e.target.value })}
+                                            value={form.ProStatus}
+                                            style={{
+                                                cursor: "pointer",
+                                            }}>
                                             <option>-</option>
-                                            <option value="1">โสด</option>
-                                            <option value="2">สมรส</option>
-                                            <option value="3">หย่า</option>
+                                            <option value="โสด">โสด</option>
+                                            <option value="สมรส">สมรส</option>
+                                            <option value="หย่า">หย่า</option>
                                         </Form.Select>
                                     </Col>
                                 </Form.Group>
@@ -175,7 +238,9 @@ function ProfileCard() {
                                     </Form.Label>
                                     <Col sm="8">
 
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text"
+                                            onChange={e => setForm({ ...form, ProDisease: e.target.value })}
+                                            value={form.ProDisease} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -192,7 +257,9 @@ function ProfileCard() {
                                         เลขประจำตัวประชาชน <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            onChange={e => setForm({ ...form, ProID: e.target.value })}
+                                            value={form.ProID} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกเลขประจำตัวประชาชน
                                         </Form.Control.Feedback>
@@ -206,7 +273,9 @@ function ProfileCard() {
                                     </Form.Label>
                                     <Col sm="8">
 
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text"
+                                            onChange={e => setForm({ ...form, ProPlace: e.target.value })}
+                                            value={form.ProPlace} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -230,8 +299,8 @@ function ProfileCard() {
                                                             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
                                                         }
                                                     }}
-                                                    onChange={(dueDate) => setDueDate(dueDate)}
-                                                    // onChange={(dueDate) => setDueDate(dueDate.format('DD-MM-YYYY'))}
+                                                    onChange={handleChangeGiveDate}
+                                                    value={dayjs(giveDate)}
                                                     format="DD/MM/YYYY"
                                                     desktopModeMediaQuery="@media (pointer: fine)"
                                                 />
@@ -259,8 +328,8 @@ function ProfileCard() {
                                                             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
                                                         }
                                                     }}
-                                                    onChange={(dueDate) => setDueDate(dueDate)}
-                                                    // onChange={(dueDate) => setDueDate(dueDate.format('DD-MM-YYYY'))}
+                                                    onChange={handleChangeExpireDate}
+                                                    value={dayjs(expireDate)}
                                                     format="DD/MM/YYYY"
                                                     desktopModeMediaQuery="@media (pointer: fine)"
                                                 />
@@ -289,8 +358,8 @@ function ProfileCard() {
                                                             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
                                                         }
                                                     }}
-                                                    onChange={(dueDate) => setDueDate(dueDate)}
-                                                    // onChange={(dueDate) => setDueDate(dueDate.format('DD-MM-YYYY'))}
+                                                    onChange={handleChangeBirthDate}
+                                                    value={dayjs(birthDate)}
                                                     format="DD/MM/YYYY"
                                                     desktopModeMediaQuery="@media (pointer: fine)"
                                                 />
@@ -305,17 +374,29 @@ function ProfileCard() {
                                         จังหวัดที่เกิด <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} required>
-                                            <option ></option>
-                                            {provinces.map((item) => {
+                                        <Form.Select
+                                            value={selected.province_id}
+                                            aria-label="Default select example"
+                                            onChange={e => {
+                                                setSelected({
+                                                    ...selected,
+                                                    province_id: e.target.value,
+                                                });
+                                                setForm({
+                                                    ...form,
+                                                    Province: provinces.find(item => item.id === +e.target.value).name_th
+                                                });
+                                            }}
+                                            style={{ cursor: "pointer" }}
+                                            required
+                                        >
+                                            <option></option>
+                                            {provinces.map(item => {
                                                 return (
-                                                    <option key={item.id} value={item.id}
-                                                        id='province_id'>
+                                                    <option key={item.id} value={item.id} id="province_id">
                                                         {item.name_th}
                                                     </option>
-                                                )
+                                                );
                                             })}
                                         </Form.Select>
                                         <Form.Control.Feedback type="invalid">
@@ -332,7 +413,9 @@ function ProfileCard() {
                                         ส่วนสูง <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            onChange={e => setForm({ ...form, ProHeight: e.target.value })}
+                                            value={form.ProHeight} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกส่วนสูง
                                         </Form.Control.Feedback>
@@ -345,7 +428,9 @@ function ProfileCard() {
                                         น้ำหนัก <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            onChange={e => setForm({ ...form, ProWeight: e.target.value })}
+                                            value={form.ProWeight} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกน้ำหนัก
                                         </Form.Control.Feedback>
@@ -360,7 +445,9 @@ function ProfileCard() {
                                         สัญชาติ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            onChange={e => setForm({ ...form, ProNationality: e.target.value })}
+                                            value={form.ProNationality} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกสัญชาติ
                                         </Form.Control.Feedback>
@@ -373,7 +460,9 @@ function ProfileCard() {
                                         ศาสนา <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            onChange={e => setForm({ ...form, ProReligion: e.target.value })}
+                                            value={form.ProReligion} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกศาสนา
                                         </Form.Control.Feedback>
@@ -388,7 +477,9 @@ function ProfileCard() {
                                         โทรศัพท์มือถือ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            onChange={e => setForm({ ...form, ProMobile: e.target.value })}
+                                            value={form.ProMobile} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกเบอร์โทรศัพท์มือถือ
                                         </Form.Control.Feedback>
@@ -402,7 +493,9 @@ function ProfileCard() {
                                     </Form.Label>
                                     <Col sm="8">
 
-                                        <Form.Control type="number" min={0}  maxLength={0}/>
+                                        <Form.Control type="number" min={0} maxLength={0}
+                                            onChange={e => setForm({ ...form, ProHomephone: e.target.value })}
+                                            value={form.ProHomephone} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -415,7 +508,9 @@ function ProfileCard() {
                                     </Form.Label>
                                     <Col sm="8">
 
-                                        <Form.Control type="number" min={0} />
+                                        <Form.Control type="number" min={0}
+                                            onChange={e => setForm({ ...form, ProWorkphone: e.target.value })}
+                                            value={form.ProWorkphone} />
                                     </Col>
                                 </Form.Group>
                             </Col>

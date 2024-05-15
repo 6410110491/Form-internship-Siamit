@@ -8,8 +8,48 @@ import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Col, Row, Form } from 'react-bootstrap';
 
-function AddressCard() {
-    const [expanded, setExpanded] = React.useState(true);
+function AddressCard({ expanded, setExpanded }) {
+    const [provinces, setProvinces] = useState([]);
+    const [amphures, setAmphures] = useState([]);
+    const [tambons, setTambons] = useState([]);
+    const [zipcodes, setZipcodes] = useState([]);
+
+    const [Curprovinces, setCurProvinces] = useState([]);
+    const [Curamphures, setCurAmphures] = useState([]);
+    const [Curtambons, setCurTambons] = useState([]);
+    const [CurZipcodes, setCurZipcodes] = useState([]);
+
+    const [selected, setSelected] = useState({
+        province_id: undefined,
+        amphure_id: undefined,
+        tambon_id: undefined,
+
+        Curprovince_id: undefined,
+        Curamphure_id: undefined,
+        Curtambon_id: undefined,
+    });
+
+
+    const [form, setForm] = useState({
+        HouseNumber: "",
+        Moo: "",
+        Soi: "",
+        Road: "",
+        Province: "",
+        District: "",
+        Subdistrict: "",
+        Zipcode: "",
+
+        CurHoseNumber: "",
+        CurMoo: "",
+        CurSoi: "",
+        CurRoad: "",
+        CurProvince: "",
+        CurDistrict: "",
+        CurSubdistrict: "",
+        CurZipcode: ""
+    });
+
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -26,17 +66,6 @@ function AddressCard() {
         }),
     }));
 
-
-    const [provinces, setProvinces] = useState([]);
-    const [amphures, setAmphures] = useState([]);
-    const [tambons, setTambons] = useState([]);
-    const [zipcodes, setZipcodes] = useState([]);
-    const [selected, setSelected] = useState({
-        province_id: undefined,
-        amphure_id: undefined,
-        tambon_id: undefined
-    });
-
     // get province from api
     useEffect(() => {
         (() => {
@@ -46,6 +75,7 @@ function AddressCard() {
                 .then((response) => response.json())
                 .then((result) => {
                     setProvinces(result);
+                    setCurProvinces(result);
                 });
         })();
     }, []);
@@ -60,6 +90,14 @@ function AddressCard() {
                 setAmphures(District.amphure)
             }
         }
+        if (selected.Curprovince_id !== undefined) {
+            const CurDistrict = Curprovinces.find(
+                (item) => item.id === +selected.Curprovince_id
+            )
+            if (CurDistrict !== undefined) {
+                setCurAmphures(CurDistrict.amphure)
+            }
+        }
     });
     // find sub-district
     useEffect(() => {
@@ -71,6 +109,14 @@ function AddressCard() {
                 setTambons(SubDistrict.tambon)
             }
         }
+        if (selected.Curamphure_id !== undefined) {
+            const CurSubDistrict = Curamphures.find(
+                (item) => item.id === +selected.Curamphure_id
+            )
+            if (CurSubDistrict !== undefined) {
+                setCurTambons(CurSubDistrict.tambon)
+            }
+        }
     });
     // find zipcode
     useEffect(() => {
@@ -80,6 +126,14 @@ function AddressCard() {
             )
             if (ZipCode !== undefined) {
                 setZipcodes(ZipCode)
+            }
+        }
+        if (selected.Curtambon_id !== undefined) {
+            const CurZipCode = Curtambons.find(
+                (item) => item.id === + selected.Curtambon_id
+            )
+            if (CurZipCode !== undefined) {
+                setCurZipcodes(CurZipCode)
             }
         }
     });
@@ -120,7 +174,9 @@ function AddressCard() {
                                         เลขที่ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            onChange={e => setForm({ ...form, HouseNumber: e.target.value })}
+                                            value={form.HouseNumber} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกเลขที่
                                         </Form.Control.Feedback>
@@ -133,7 +189,9 @@ function AddressCard() {
                                         หมู่ที่ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            onChange={e => setForm({ ...form, Moo: e.target.value })}
+                                            value={form.Moo} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกหมู่ที่
                                         </Form.Control.Feedback>
@@ -146,7 +204,9 @@ function AddressCard() {
                                         ตรอก/ซอย :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text"
+                                            onChange={e => setForm({ ...form, Soi: e.target.value })}
+                                            value={form.Soi} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -156,7 +216,9 @@ function AddressCard() {
                                         ถนน :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text"
+                                            onChange={e => setForm({ ...form, Road: e.target.value })}
+                                            value={form.Road} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -168,13 +230,22 @@ function AddressCard() {
                                         จังหวัด <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} required
+                                        <Form.Select aria-label="Default select example"
+                                            value={selected.province_id}
+                                            style={{
+                                                cursor: "pointer",
+                                            }} required
                                             onChange={e => setSelected({
                                                 ...selected,
-                                                province_id: e.target.value
-                                            })}>
+                                                province_id: e.target.value,
+                                            },
+                                                setForm(
+                                                    {
+                                                        ...form, Province: provinces.find(
+                                                            (item) => item.id === +e.target.value
+                                                        ).name_th
+                                                    }
+                                                ))}>
                                             <option ></option>
                                             {provinces.map((item) => {
                                                 return (
@@ -197,14 +268,23 @@ function AddressCard() {
                                         อำเภอ/เขต <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} required
+                                        <Form.Select aria-label="Default select example"
+                                            value={selected.amphure_id}
+                                            style={{
+                                                cursor: "pointer",
+                                            }} required
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 amphure_id: e.target.value
-                                            })}
-                                        >
+                                            },
+                                                setForm(
+                                                    {
+                                                        ...form, District: amphures.find(
+                                                            (item) => item.id === +e.target.value
+                                                        ).name_th
+                                                    }
+                                                )
+                                            )}>
                                             <option ></option>
                                             {amphures.map((item) => {
                                                 return (
@@ -229,13 +309,23 @@ function AddressCard() {
                                         ตำบล/แขวง <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} required
+                                        <Form.Select aria-label="Default select example"
+                                            value={selected.tambon_id}
+                                            style={{
+                                                cursor: "pointer",
+                                            }} required
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 tambon_id: e.target.value
-                                            })}
+                                            },
+                                                setForm(
+                                                    {
+                                                        ...form, Subdistrict: tambons.find(
+                                                            (item) => item.id === +e.target.value
+                                                        ).name_th
+                                                    }
+                                                )
+                                            )}
                                         >
                                             <option ></option>
                                             {tambons.map((item) => {
@@ -259,9 +349,18 @@ function AddressCard() {
                                         รหัสไปรษณีย์ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} required>
+                                        <Form.Select aria-label="Default select example"
+                                            value={zipcodes.zip_code}
+                                            onChange={e => setForm({ ...form, Zipcode: e.target.value },
+                                                setForm(
+                                                    {
+                                                        ...form, Zipcode: zipcodes.zip_code
+                                                    }
+                                                )
+                                            )}
+                                            style={{
+                                                cursor: "pointer",
+                                            }} required>
                                             <option></option>
                                             <option id='zipcode'>{zipcodes.zip_code}</option>
                                         </Form.Select>
@@ -290,7 +389,9 @@ function AddressCard() {
                                         เลขที่ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            onChange={e => setForm({ ...form, CurHoseNumber: e.target.value })}
+                                            value={form.CurHoseNumber} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกเลขที่
                                         </Form.Control.Feedback>
@@ -303,7 +404,9 @@ function AddressCard() {
                                         หมู่ที่ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            onChange={e => setForm({ ...form, CurMoo: e.target.value })}
+                                            value={form.CurMoo} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกหมู่ที่
                                         </Form.Control.Feedback>
@@ -316,7 +419,9 @@ function AddressCard() {
                                         ตรอก/ซอย  :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text"
+                                            onChange={e => setForm({ ...form, CurSoi: e.target.value })}
+                                            value={form.CurSoi} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -326,7 +431,9 @@ function AddressCard() {
                                         ถนน :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text"
+                                            onChange={e => setForm({ ...form, CurRoad: e.target.value })}
+                                            value={form.CurRoad} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -338,15 +445,24 @@ function AddressCard() {
                                         จังหวัด <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} required
+                                        <Form.Select aria-label="Default select example"
+                                            value={selected.Curprovince_id}
+                                            style={{
+                                                cursor: "pointer",
+                                            }} required
                                             onChange={e => setSelected({
                                                 ...selected,
-                                                province_id: e.target.value
-                                            })}>
+                                                Curprovince_id: e.target.value
+                                            },
+                                                setForm(
+                                                    {
+                                                        ...form, CurProvince: Curprovinces.find(
+                                                            (item) => item.id === +e.target.value
+                                                        ).name_th
+                                                    }
+                                                ))}>
                                             <option ></option>
-                                            {provinces.map((item) => {
+                                            {Curprovinces.map((item) => {
                                                 return (
                                                     <option key={item.id} value={item.id}
                                                         id='province_id'>
@@ -367,16 +483,25 @@ function AddressCard() {
                                         อำเภอ/เขต <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} required
+                                        <Form.Select aria-label="Default select example"
+                                            value={selected.Curamphure_id}
+                                            style={{
+                                                cursor: "pointer",
+                                            }} required
                                             onChange={e => setSelected({
                                                 ...selected,
-                                                amphure_id: e.target.value
-                                            })}
+                                                Curamphure_id: e.target.value
+                                            },
+                                                setForm(
+                                                    {
+                                                        ...form, CurDistrict: Curamphures.find(
+                                                            (item) => item.id === +e.target.value
+                                                        ).name_th
+                                                    }
+                                                ))}
                                         >
                                             <option ></option>
-                                            {amphures.map((item) => {
+                                            {Curamphures.map((item) => {
                                                 return (
                                                     <option key={item.id} value={item.id}
                                                         id='amphures_id'>
@@ -399,16 +524,25 @@ function AddressCard() {
                                         ตำบล/แขวง <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} required
+                                        <Form.Select aria-label="Default select example"
+                                        value={selected.Curtambon_id}
+                                            style={{
+                                                cursor: "pointer",
+                                            }} required
                                             onChange={e => setSelected({
                                                 ...selected,
-                                                tambon_id: e.target.value
-                                            })}
+                                                Curtambon_id: e.target.value
+                                            },
+                                                setForm(
+                                                    {
+                                                        ...form, CurSubdistrict: Curtambons.find(
+                                                            (item) => item.id === +e.target.value
+                                                        ).name_th
+                                                    }
+                                                ))}
                                         >
                                             <option ></option>
-                                            {tambons.map((item) => {
+                                            {Curtambons.map((item) => {
                                                 return (
                                                     <option key={item.id} value={item.id}
                                                         id='tambons_id'>
@@ -429,11 +563,20 @@ function AddressCard() {
                                         รหัสไปรษณีย์ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} required>
+                                        <Form.Select aria-label="Default select example"
+                                            value={CurZipcodes.zip_code}
+                                            onChange={e => setForm({ ...form, CurZipcode: e.target.value },
+                                                setForm(
+                                                    {
+                                                        ...form, CurZipcode: CurZipcodes.zip_code
+                                                    }
+                                                )
+                                            )}
+                                            style={{
+                                                cursor: "pointer",
+                                            }} required>
                                             <option></option>
-                                            <option id='zipcode'>{zipcodes.zip_code}</option>
+                                            <option id='zipcode'>{CurZipcodes.zip_code}</option>
                                         </Form.Select>
                                         <Form.Control.Feedback type="invalid">
                                             กรุณาเลือกรหัสไปรษณีย์

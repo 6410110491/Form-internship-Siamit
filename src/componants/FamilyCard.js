@@ -8,8 +8,48 @@ import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Col, Row, Form, Button } from 'react-bootstrap';
 
-function FamilyCard() {
-    const [expanded, setExpanded] = React.useState(true);
+function FamilyCard({ expanded, setExpanded }) {
+    const [numForms, setNumForms] = useState(1);
+    const [provinces, setProvinces] = useState([]);
+    const [amphures, setAmphures] = useState([]);
+    const [tambons, setTambons] = useState([]);
+    const [zipcodes, setZipcodes] = useState([]);
+    const [selected, setSelected] = useState({
+        province_id: undefined,
+        amphure_id: undefined,
+        tambon_id: undefined
+    });
+
+    const [form, setForm] = React.useState({
+        DadName: '',
+        DadSureName: '',
+        DadAge: '',
+        DadJob: '',
+        MomName: '',
+        MomSureName: '',
+        MomAge: '',
+        MomJob: '',
+
+        FamAddr: '',
+        FamMoo: '',
+        FamSoi: '',
+        FamRoad: '',
+        FamProvince: '',
+        FamAmphure: '',
+        FamTambon: '',
+        FamZipcode: '',
+        FamPhone: '',
+
+        FamCount: '',
+        CountSis: '',
+        CountBro: '',
+        CountMe: '',
+
+        FamName1: '',
+        FamSureName1: '',
+        FamAge1: '',
+        FamJob1: '',
+    });
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -26,25 +66,36 @@ function FamilyCard() {
         }),
     }));
 
-    const [numForms, setNumForms] = useState(1);
-
     const addForm = () => {
         setNumForms(numForms + 1);
+        setForm(prevForm => ({
+            ...prevForm,
+            [`FamName${numForms + 1}`]: '',
+            [`FamSureName${numForms + 1}`]: '',
+            [`FamAge${numForms + 1}`]: '',
+            [`FamJob${numForms + 1}`]: ''
+        }));
     };
 
     const removeForm = () => {
         setNumForms(numForms - 1);
+        setForm(prevForm => {
+            const newForm = { ...prevForm };
+            delete newForm[`FamName${numForms}`];
+            delete newForm[`FamSureName${numForms}`];
+            delete newForm[`FamAge${numForms}`];
+            delete newForm[`FamJob${numForms}`];
+            return newForm;
+        });
     };
 
-    const [provinces, setProvinces] = useState([]);
-    const [amphures, setAmphures] = useState([]);
-    const [tambons, setTambons] = useState([]);
-    const [zipcodes, setZipcodes] = useState([]);
-    const [selected, setSelected] = useState({
-        province_id: undefined,
-        amphure_id: undefined,
-        tambon_id: undefined
-    });
+    const handleChange = (e, fieldName) => {
+        const { value } = e.target;
+        setForm(prevForm => ({
+            ...prevForm,
+            [fieldName]: value
+        }));
+    };
 
     // get province from api
     useEffect(() => {
@@ -120,7 +171,9 @@ function FamilyCard() {
                                         บิดา ชื่อ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            value={form.DadName}
+                                            onChange={e => setForm({ ...form, DadName: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกชื่อบิดา
                                         </Form.Control.Feedback>
@@ -133,7 +186,9 @@ function FamilyCard() {
                                         นามสกุล <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            value={form.DadSureName}
+                                            onChange={e => setForm({ ...form, DadSureName: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกนามสกุลบิดา
                                         </Form.Control.Feedback>
@@ -146,7 +201,9 @@ function FamilyCard() {
                                         อายุ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            value={form.DadAge}
+                                            onChange={e => setForm({ ...form, DadAge: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกอายุบิดา
                                         </Form.Control.Feedback>
@@ -159,7 +216,9 @@ function FamilyCard() {
                                         อาชีพ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            value={form.DadJob}
+                                            onChange={e => setForm({ ...form, DadJob: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกอาชีพบิดา
                                         </Form.Control.Feedback>
@@ -174,7 +233,9 @@ function FamilyCard() {
                                         มารดา ชื่อ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            value={form.MomName}
+                                            onChange={e => setForm({ ...form, MomName: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกชื่อมารดา
                                         </Form.Control.Feedback>
@@ -187,7 +248,9 @@ function FamilyCard() {
                                         นามสกุล <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            value={form.MomSureName}
+                                            onChange={e => setForm({ ...form, MomSureName: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกนามสกุลมารดา
                                         </Form.Control.Feedback>
@@ -200,7 +263,9 @@ function FamilyCard() {
                                         อายุ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            value={form.MomAge}
+                                            onChange={e => setForm({ ...form, MomAge: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกอายุมารดา
                                         </Form.Control.Feedback>
@@ -213,7 +278,9 @@ function FamilyCard() {
                                         อาชีพ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            value={form.MomJob}
+                                            onChange={e => setForm({ ...form, MomJob: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกอาชีพมารดา
                                         </Form.Control.Feedback>
@@ -239,7 +306,9 @@ function FamilyCard() {
                                         เลขที่ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="text" required />
+                                        <Form.Control type="text" required
+                                            value={form.FamAddr}
+                                            onChange={e => setForm({ ...form, FamAddr: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกเลขที่
                                         </Form.Control.Feedback>
@@ -252,7 +321,9 @@ function FamilyCard() {
                                         หมู่ที่ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            value={form.FamMoo}
+                                            onChange={e => setForm({ ...form, FamMoo: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกหมู่ที่
                                         </Form.Control.Feedback>
@@ -265,7 +336,9 @@ function FamilyCard() {
                                         ตรอก/ซอย  :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text"
+                                            value={form.FamSoi}
+                                            onChange={e => setForm({ ...form, FamSoi: e.target.value })} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -275,7 +348,9 @@ function FamilyCard() {
                                         ถนน :
                                     </Form.Label>
                                     <Col sm="8">
-                                        <Form.Control type="text" />
+                                        <Form.Control type="text"
+                                            value={form.FamRoad}
+                                            onChange={e => setForm({ ...form, FamRoad: e.target.value })} />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -290,10 +365,15 @@ function FamilyCard() {
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }}
+                                            value={selected.province_id}
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 province_id: e.target.value
-                                            })}>
+                                            },
+                                                setForm({
+                                                    ...form,
+                                                    Province: provinces.find(item => item.id === +e.target.value).name_th
+                                                }))}>
                                             <option ></option>
                                             {provinces.map((item) => {
                                                 return (
@@ -319,10 +399,18 @@ function FamilyCard() {
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }}
+                                            value={selected.amphure_id}
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 amphure_id: e.target.value
-                                            })}
+                                            },
+                                                setForm(
+                                                    {
+                                                        ...form, District: amphures.find(
+                                                            (item) => item.id === +e.target.value
+                                                        ).name_th
+                                                    }
+                                                ))}
                                         >
                                             <option ></option>
                                             {amphures.map((item) => {
@@ -351,10 +439,18 @@ function FamilyCard() {
                                         <Form.Select aria-label="Default select example" style={{
                                             cursor: "pointer",
                                         }}
+                                            value={selected.tambon_id}
                                             onChange={e => setSelected({
                                                 ...selected,
                                                 tambon_id: e.target.value
-                                            })}
+                                            },
+                                                setForm(
+                                                    {
+                                                        ...form, Subdistrict: tambons.find(
+                                                            (item) => item.id === +e.target.value
+                                                        ).name_th
+                                                    }
+                                                ))}
                                         >
                                             <option ></option>
                                             {tambons.map((item) => {
@@ -378,9 +474,18 @@ function FamilyCard() {
                                         รหัสไปรษณีย์ :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example" style={{
-                                            cursor: "pointer",
-                                        }} >
+                                        <Form.Select aria-label="Default select example"
+                                            value={zipcodes.zip_code}
+                                            onChange={e => setForm({ ...form, Zipcode: e.target.value },
+                                                setForm(
+                                                    {
+                                                        ...form, Zipcode: zipcodes.zip_code
+                                                    }
+                                                )
+                                            )}
+                                            style={{
+                                                cursor: "pointer",
+                                            }} >
                                             <option></option>
                                             <option id='zipcode'>{zipcodes.zip_code}</option>
                                         </Form.Select>
@@ -398,7 +503,10 @@ function FamilyCard() {
                                         โทรศัพท์ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            value={form.FamPhone}
+                                            onChange={e => setForm({ ...form, FamPhone: e.target.value })
+                                            } />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกเบอร์โทรศัพท์
                                         </Form.Control.Feedback>
@@ -424,7 +532,9 @@ function FamilyCard() {
                                         จำนวน <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            value={form.FamCount}
+                                            onChange={e => setForm({ ...form, FamCount: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกจำนวนพี่น้อง
                                         </Form.Control.Feedback>
@@ -437,7 +547,9 @@ function FamilyCard() {
                                         ชาย <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            value={form.CountBro}
+                                            onChange={e => setForm({ ...form, CountBro: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกจำนวนพี่น้องผู้ชาย
                                         </Form.Control.Feedback>
@@ -450,7 +562,9 @@ function FamilyCard() {
                                         หญิง <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            value={form.CountSis}
+                                            onChange={e => setForm({ ...form, CountSis: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกจำนวนพี่น้องผู้หญิง
                                         </Form.Control.Feedback>
@@ -463,7 +577,9 @@ function FamilyCard() {
                                         ผู้สมัครเป็นคนที่ <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Control type="number" min={0} required />
+                                        <Form.Control type="number" min={0} required
+                                            value={form.CountMe}
+                                            onChange={e => setForm({ ...form, CountMe: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             กรุณากรอกเป็นคนที่เท่าไหร่
                                         </Form.Control.Feedback>
@@ -501,7 +617,11 @@ function FamilyCard() {
                                                     คนที่ {index + 1} ชื่อ :
                                                 </Form.Label>
                                                 <Col sm="8">
-                                                    <Form.Control type="text" />
+                                                    <Form.Control
+                                                        type="text"
+                                                        value={form[`FamName${index + 1}`]}
+                                                        onChange={(e) => handleChange(e, `FamName${index + 1}`)}
+                                                    />
                                                 </Col>
                                             </Form.Group>
                                         </Col>
@@ -511,7 +631,11 @@ function FamilyCard() {
                                                     นามสกุล :
                                                 </Form.Label>
                                                 <Col sm="8">
-                                                    <Form.Control type="text" />
+                                                    <Form.Control
+                                                        type="text"
+                                                        value={form[`FamSureName${index + 1}`]}
+                                                        onChange={(e) => handleChange(e, `FamSureName${index + 1}`)}
+                                                    />
                                                 </Col>
                                             </Form.Group>
                                         </Col>
@@ -523,7 +647,12 @@ function FamilyCard() {
                                                     อายุ :
                                                 </Form.Label>
                                                 <Col sm="8">
-                                                    <Form.Control type="number" min={0} />
+                                                    <Form.Control
+                                                        type="number"
+                                                        min={0}
+                                                        value={form[`FamAge${index + 1}`]}
+                                                        onChange={(e) => handleChange(e, `FamAge${index + 1}`)}
+                                                    />
                                                 </Col>
                                             </Form.Group>
                                         </Col>
@@ -533,18 +662,23 @@ function FamilyCard() {
                                                     อาชีพ :
                                                 </Form.Label>
                                                 <Col sm="8">
-                                                    <Form.Control type="text" />
+                                                    <Form.Control
+                                                        type="text"
+                                                        value={form[`FamJob${index + 1}`]}
+                                                        onChange={(e) => handleChange(e, `FamJob${index + 1}`)}
+                                                    />
                                                 </Col>
                                             </Form.Group>
                                         </Col>
                                     </Row>
                                 </div>
                             ))}
+
                         </div>
                     </CardContent>
                 </Collapse>
-            </Card>
-        </div>
+            </Card >
+        </div >
     )
 }
 
