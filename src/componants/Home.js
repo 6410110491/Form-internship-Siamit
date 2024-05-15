@@ -21,35 +21,29 @@ function Home() {
     const [endDueDate, setEndDueDate] = useState(new Date());
     const [totalDays, setTotalDays] = useState(0);
 
-    const calculateTotalDays = (startDate, endDate) => {
-        if (startDate && endDate) {
-            let totalDays = 0;
-            let currentDate = dayjs(startDate);
-            const end = dayjs(endDate);
-
-            while (currentDate.isBefore(end, 'day')) {
-                if (currentDate.day() !== 0 && currentDate.day() !== 6) { // Check if not Saturday or Sunday
-                    totalDays++;
-                }
-                currentDate = currentDate.add(1, 'day');
+    const calculateTotalDays = (startDate, EndDate) => {
+        if (startDate && EndDate) {
+            const start = dayjs(startDate);
+            const end = dayjs(EndDate);
+            const days = end.diff(start, 'day');
+            if (days < 0) {
+                return 0;
             }
-
-            return totalDays;
+            return (days)
         }
-        return 0;
-    };
+    }
 
     const handleStartDateChange = (dueDate) => {
         setStartDueDate(dueDate);
-        const newTotalDays = calculateTotalDays(dueDate, endDueDate);
-        setTotalDays(newTotalDays);
-    };
+        const total = calculateTotalDays(dueDate, endDueDate);
+        setTotalDays(total);
+    }
 
     const handleEndDateChange = (dueDate) => {
         setEndDueDate(dueDate);
-        const newTotalDays = calculateTotalDays(startDueDate, dueDate);
-        setTotalDays(newTotalDays);
-    };
+        const total = calculateTotalDays(startDueDate, dueDate);
+        setTotalDays(total);
+    }
 
     const [validated, setValidated] = useState(false);
     const handleSubmit = (event) => {
@@ -189,7 +183,6 @@ function Home() {
                                                 }}
                                                 onChange={handleStartDateChange}
                                                 format="DD/MM/YYYY"
-                                                value={dayjs(startDueDate)}
                                                 desktopModeMediaQuery="@media (pointer: fine)"
                                             />
                                         </LocalizationProvider>
@@ -225,7 +218,6 @@ function Home() {
                                                 }}
                                                 onChange={handleEndDateChange}
                                                 format="DD/MM/YYYY"
-                                                value={dayjs(endDueDate)}
                                                 desktopModeMediaQuery="@media (pointer: fine)"
                                             />
                                         </LocalizationProvider>
