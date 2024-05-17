@@ -8,7 +8,6 @@ import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Col, Row, Form } from 'react-bootstrap';
 
-
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -19,13 +18,13 @@ function ProfileCard({ expanded, setExpanded }) {
     const [giveDate, setGiveDate] = useState(new Date())
     const [expireDate, setExpireDate] = useState(new Date())
     const [birthDate, setBirthDate] = useState(new Date())
+    const [provinces, setProvinces] = useState([]);
 
     const [selected, setSelected] = useState({
         province_id: undefined,
         amphure_id: undefined,
         tambon_id: undefined,
     });
-
 
     const [form, setForm] = useState({
         ProNameTH: "",
@@ -81,7 +80,6 @@ function ProfileCard({ expanded, setExpanded }) {
             duration: theme.transitions.duration.shortest,
         }),
     }));
-    const [provinces, setProvinces] = useState([]);
 
     useEffect(() => {
         (() => {
@@ -224,7 +222,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                             <option>-</option>
                                             <option value="โสด">โสด</option>
                                             <option value="สมรส">สมรส</option>
-                                            <option value="หย่า">หย่า</option>
+                                            <option value="หย่า">หย่าร้าง</option>
                                         </Form.Select>
                                     </Col>
                                 </Form.Group>
@@ -378,26 +376,26 @@ function ProfileCard({ expanded, setExpanded }) {
                                             value={selected.province_id}
                                             aria-label="Default select example"
                                             onChange={e => {
+                                                const selectedProvinceId = e.target.value;
                                                 setSelected({
                                                     ...selected,
-                                                    province_id: e.target.value,
+                                                    province_id: selectedProvinceId,
                                                 });
+                                                const selectedProvince = provinces.find(item => item.id === +selectedProvinceId);
                                                 setForm({
                                                     ...form,
-                                                    Province: provinces.find(item => item.id === +e.target.value).name_th
+                                                    Province: selectedProvince.name_th
                                                 });
                                             }}
                                             style={{ cursor: "pointer" }}
                                             required
                                         >
                                             <option></option>
-                                            {provinces.map(item => {
-                                                return (
-                                                    <option key={item.id} value={item.id} id="province_id">
-                                                        {item.name_th}
-                                                    </option>
-                                                );
-                                            })}
+                                            {provinces.map(item => (
+                                                <option key={item.id} value={item.id} id="province_id">
+                                                    {item.name_th}
+                                                </option>
+                                            ))}
                                         </Form.Select>
                                         <Form.Control.Feedback type="invalid">
                                             กรุณาเลือกจังหวัดที่เกิด

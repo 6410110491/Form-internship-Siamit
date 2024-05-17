@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Col, Container, Row, Button, Form } from 'react-bootstrap'
 import ProfileCard from './ProfileCard'
 import AddressCard from './AddressCard'
@@ -12,6 +12,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs'
+import SuccessPopup from './SuccessPopup'
 
 
 function Home() {
@@ -20,10 +21,10 @@ function Home() {
     const [emergencyExpanded, setEmergencyExpanded] = useState(false);
     const [familyExpanded, setFamilyExpanded] = useState(false);
     const [generalExpanded, setGeneralExpanded] = useState(false);
+    const [trigger, setTrigger] = useState(false);
 
-
-    const [startDueDate, setStartDueDate] = useState(new Date());
-    const [endDueDate, setEndDueDate] = useState(new Date());
+    const [startDueDate, setStartDueDate] = useState();
+    const [endDueDate, setEndDueDate] = useState();
     const [totalDays, setTotalDays] = useState(0);
 
     const [imageSrc, setImageSrc] = useState(require('../images/blank-profile.jpg'));
@@ -31,7 +32,8 @@ function Home() {
 
     const [validated, setValidated] = useState(false);
     const formRef = useRef(null);
-
+    const startDatePickerRef = useRef(null);
+    const endDatePickerRef = useRef(null);
 
     const [form, setForm] = useState({
         ProfileImage: '',
@@ -56,8 +58,9 @@ function Home() {
     const handleStartDateChange = (dueDate) => {
         setStartDueDate(dueDate);
         const total = calculateTotalDays(dueDate, endDueDate);
-        setTotalDays(total);
-
+        if (typeof total === 'number') {
+            setTotalDays(total);
+        }
         setForm({
             ...form, startDate: dueDate,
             totalDays: total
@@ -67,7 +70,9 @@ function Home() {
     const handleEndDateChange = (dueDate) => {
         setEndDueDate(dueDate);
         const total = calculateTotalDays(startDueDate, dueDate);
-        setTotalDays(total);
+        if (typeof total === 'number') {
+            setTotalDays(total);
+        }
 
         setForm({
             ...form, endDate: dueDate
@@ -75,46 +80,81 @@ function Home() {
         });
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const form = formRef.current;
-        if (form && form.checkValidity() === false) {
-            // ค้นหา element ที่ไม่ถูกต้องและเลื่อนไปยังตำแหน่งนั้น
-            const firstInvalidField = form.querySelector(':invalid');
-            if (firstInvalidField) {
-                firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                firstInvalidField.focus();
-            }
-        }
-        setValidated(true);
-        setProfileExpanded(true);
-        setAddressExpanded(true);
-        setEmergencyExpanded(true);
-        setFamilyExpanded(true);
-        setGeneralExpanded(true);
-    };
-
+    const handlePopup = () => {
+        setTrigger(true);
+    }
 
     const handleUploadClick = () => {
         fileInputRef.current.click();
         setForm({ ...form, ProfileImage: imageSrc });
     };
 
+    const handleDeleteClick = () => {
+        fileInputRef.current.value = '';
+        setImageSrc(require('../images/blank-profile.jpg'));
+        setForm({ ...form, ProfileImage: '' });
+    }
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setImageSrc(e.target.result);
-            };
-            reader.readAsDataURL(file);
+            const fileType = file.type;
+            if (fileType === 'image/jpeg' || fileType === 'image/png') {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    setImageSrc(e.target.result);
+                    setForm({ ...form, ProfileImage: e.target.result });
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('กรุณาเลือกไฟล์รูปภาพเท่านั้น');
+            }
         }
-        console.log(file);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const form = formRef.current;
+        if (!profileExpanded || !addressExpanded || !emergencyExpanded || !familyExpanded || !generalExpanded) {
+            setProfileExpanded(true);
+            setAddressExpanded(true);
+            setEmergencyExpanded(true);
+            setFamilyExpanded(true);
+            setGeneralExpanded(true);
+        }
+        await new Promise(resolve => setTimeout(resolve));
+
+        if (startDueDate === undefined || endDueDate === undefined) {
+            const startDatePicker = startDatePickerRef.current;
+            const endDatePicker = endDatePickerRef.current;
+
+            if (startDatePicker && startDatePicker.querySelector('[value =""]')) {
+                startDatePicker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                startDatePicker.focus();
+                setValidated(true);
+            } else if (endDatePicker && endDatePicker.querySelector('[value =""]')) {
+                endDatePicker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                endDatePicker.focus();
+                setValidated(true);
+            }
+        } else if (form && form.checkValidity() === false) {
+            const firstInvalidField = form.querySelector(':invalid');
+            if (firstInvalidField) {
+                firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstInvalidField.focus();
+            }
+            setValidated(true);
+        } else {
+            handlePopup();
+        }
     };
 
 
+
+
+    console.log(form)
     return (
         <div style={{ marginBottom: "10rem" }}>
             <div style={{ width: "100%", height: "75px", backgroundColor: "#1B6BB2" }}></div>
@@ -155,7 +195,7 @@ function Home() {
                 {/* Divider */}
                 <div style={{ height: "2px", width: "100%", backgroundColor: "#1B6BB2" }}></div>
 
-                {/* Form Header */}
+                {/* Form  */}
                 <Container style={{ marginTop: "2rem" }}>
                     <div className='form-header'
                         style={{
@@ -180,14 +220,13 @@ function Home() {
                                     }}>
                                         <img src={imageSrc} alt='profile'
                                             className='logo-img'
-                                            style={{ borderRadius: "15px", width: "150px", height: "150px" }} />
+                                            style={{ borderRadius: "15px", width: "150px", height: "180px" }} />
                                         <div style={{ marginTop: "0.75rem" }}>
                                             <Button variant="success" onClick={handleUploadClick}>อัพโหลด</Button>{' '}
-                                            <Button variant="danger"
-                                                onClick={() =>
-                                                    setImageSrc(require('../images/blank-profile.jpg'))}>ลบ</Button>{' '}
+                                            <Button variant="danger" onClick={handleDeleteClick}>ลบ</Button>{' '}
                                             <input
                                                 type="file"
+                                                accept="image/png, image/jpeg"
                                                 ref={fileInputRef}
                                                 style={{ display: 'none' }}
                                                 onChange={handleFileChange}
@@ -213,20 +252,29 @@ function Home() {
                                             </p>
                                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                                 <DatePicker
-                                                    slotProps={{ textField: { size: 'small' } }}
+                                                    ref={startDatePickerRef}
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: 'small',
+                                                        },
+                                                    }}
                                                     sx={{
                                                         backgroundColor: "#FFF",
                                                         borderRadius: "10px",
                                                         "& MuiInputBase-root": {
                                                             border: "none",
                                                             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                                                        },
-                                                    }} required
+                                                        }
+                                                    }}
+                                                    required={true}
                                                     onChange={handleStartDateChange}
-                                                    value={dayjs(startDueDate)}
                                                     format="DD/MM/YYYY"
                                                     desktopModeMediaQuery="@media (pointer: fine)"
                                                 />
+                                                {form.startDate == undefined && validated == true && (
+                                                    <p className='helper-text-start'>กรุณากรอกวันที่เริ่มทำงาน</p>
+                                                )}
+
                                             </LocalizationProvider>
                                         </div>
                                         <div style={{
@@ -249,20 +297,29 @@ function Home() {
                                             </p>
                                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                                 <DatePicker
-                                                    slotProps={{ textField: { size: 'small' } }}
+                                                    ref={endDatePickerRef}
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: 'small',
+                                                        }
+                                                    }}
                                                     sx={{
                                                         backgroundColor: "#FFF",
                                                         borderRadius: "10px",
                                                         "& MuiInputBase-root": {
                                                             border: "none",
-                                                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+                                                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                                                         }
-                                                    }} required
+                                                    }}
+                                                    required={true}
                                                     onChange={handleEndDateChange}
-                                                    value={dayjs(endDueDate)}
+                                                    // value={dayjs(endDueDate)}
                                                     format="DD/MM/YYYY"
                                                     desktopModeMediaQuery="@media (pointer: fine)"
                                                 />
+                                                {form.endDate == undefined && validated == true && (
+                                                    <p className='helper-text-end'>กรุณากรอกวันสุดท้ายที่ทำงาน</p>
+                                                )}
                                             </LocalizationProvider>
                                         </div>
                                     </Col>
@@ -311,14 +368,11 @@ function Home() {
                     <div style={{
                         display: "flex", justifyContent: "center", alignItems: "center"
                     }}>
-                        <Button className='form-lebel' style={{
-                            width: "100%", marginTop: "3rem",
-                            backgroundColor: "#1B6BB2", padding: "0.5remn",
-                            maxWidth: "30%", borderRadius: "15px"
-                        }} type="submit"
+                        <Button className='form-lebel button-custom' type="submit"
                             onClick={handleSubmit}>
                             ส่งใบสมัคร
                         </Button>
+                        <SuccessPopup trigger={trigger} setTrigger={setTrigger} />
                     </div>
                 </Container>
 

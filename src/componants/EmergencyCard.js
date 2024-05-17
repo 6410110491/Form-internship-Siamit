@@ -83,6 +83,9 @@ function EmergencyCard({ expanded, setExpanded }) {
                                             <option value="ญาติ">ญาติ</option>
                                             <option value="เพื่อน ">เพื่อน</option>
                                         </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            กรุณาเลือกความสัมพันธ์
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                             </Col>
