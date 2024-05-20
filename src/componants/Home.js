@@ -168,7 +168,7 @@ function Home() {
             {/* LOGO */}
             <div>
                 <Row style={{
-                    display: "flex", padding: "0.5rem"
+                    display: "flex", width: "100%", justifyContent: "center",
                 }}>
                     <Col style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                         <img src={require('../images/logo-siam-IT-Thailand.png')} alt='logo'
