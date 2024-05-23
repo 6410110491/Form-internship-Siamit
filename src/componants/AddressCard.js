@@ -183,7 +183,6 @@ function AddressCard({ expanded, setExpanded }) {
         });
     });
 
-    console.log(form);
     return (
         <div style={{ marginTop: "2rem" }}>
             <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px" }}>

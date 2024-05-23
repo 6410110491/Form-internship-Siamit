@@ -152,10 +152,6 @@ function Home() {
         }
     };
 
-
-
-
-    console.log(form)
     return (
         <div style={{ marginBottom: "10rem" }}>
             <div style={{ width: "100%", height: "75px", backgroundColor: "#1B6BB2" }}></div>
