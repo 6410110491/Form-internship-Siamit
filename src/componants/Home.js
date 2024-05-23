@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Col, Container, Row, Button, Form } from 'react-bootstrap'
 import ProfileCard from './ProfileCard'
 import AddressCard from './AddressCard'
@@ -148,6 +148,7 @@ function Home() {
             setValidated(true);
         } else {
             handlePopup();
+            window.location.reload();
         }
     };
 
@@ -271,7 +272,7 @@ function Home() {
                                                     format="DD/MM/YYYY"
                                                     desktopModeMediaQuery="@media (pointer: fine)"
                                                 />
-                                                {form.startDate == undefined && validated == true && (
+                                                {form.startDate === undefined && validated === true && (
                                                     <p className='helper-text-start'>กรุณากรอกวันที่เริ่มทำงาน</p>
                                                 )}
 
@@ -317,7 +318,7 @@ function Home() {
                                                     format="DD/MM/YYYY"
                                                     desktopModeMediaQuery="@media (pointer: fine)"
                                                 />
-                                                {form.endDate == undefined && validated == true && (
+                                                {form.endDate === undefined && validated === true && (
                                                     <p className='helper-text-end'>กรุณากรอกวันสุดท้ายที่ทำงาน</p>
                                                 )}
                                             </LocalizationProvider>

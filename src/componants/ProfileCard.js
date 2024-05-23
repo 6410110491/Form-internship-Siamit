@@ -14,6 +14,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 
+import $ from 'jquery';
+import 'select2'
+
 function ProfileCard({ expanded, setExpanded }) {
     const [giveDate, setGiveDate] = useState(new Date())
     const [expireDate, setExpireDate] = useState(new Date())
@@ -92,6 +95,29 @@ function ProfileCard({ expanded, setExpanded }) {
                 });
         })();
     }, []);
+
+    $(document).ready(function () {
+        $('#single-select-field').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+        });
+
+        $('#single-select-field').change(function () {
+            // console.log($(this).val());
+            const selectedProvinceId = $(this).val();
+            setSelected({
+                ...selected,
+                province_id: selectedProvinceId,
+            });
+            const selectedProvince = provinces.find(item => item.id === +selectedProvinceId);
+            setForm({
+                ...form,
+                Province: selectedProvince.name_th
+            });
+        });
+    });
+
     return (
         <div>
             <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px", marginTop: "2rem" }}>
@@ -372,31 +398,19 @@ function ProfileCard({ expanded, setExpanded }) {
                                         จังหวัดที่เกิด <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select
+                                        <select
+                                            className="form-select"
+                                            id="single-select-field"
                                             value={selected.province_id}
-                                            aria-label="Default select example"
-                                            onChange={e => {
-                                                const selectedProvinceId = e.target.value;
-                                                setSelected({
-                                                    ...selected,
-                                                    province_id: selectedProvinceId,
-                                                });
-                                                const selectedProvince = provinces.find(item => item.id === +selectedProvinceId);
-                                                setForm({
-                                                    ...form,
-                                                    Province: selectedProvince.name_th
-                                                });
-                                            }}
-                                            style={{ cursor: "pointer" }}
                                             required
                                         >
-                                            <option></option>
+                                            <option value=""></option>
                                             {provinces.map(item => (
-                                                <option key={item.id} value={item.id} id="province_id">
+                                                <option key={item.id} value={item.id}>
                                                     {item.name_th}
                                                 </option>
                                             ))}
-                                        </Form.Select>
+                                        </select>
                                         <Form.Control.Feedback type="invalid">
                                             กรุณาเลือกจังหวัดที่เกิด
                                         </Form.Control.Feedback>
@@ -515,7 +529,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                     </CardContent>
                 </Collapse>
-            </Card></div >
+            </Card ></div >
     )
 }
 

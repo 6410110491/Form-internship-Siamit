@@ -8,6 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Col, Row, Form } from 'react-bootstrap';
 
+import $ from 'jquery';
+import 'select2'
+
 function AddressCard({ expanded, setExpanded }) {
     const [provinces, setProvinces] = useState([]);
     const [amphures, setAmphures] = useState([]);
@@ -138,6 +141,49 @@ function AddressCard({ expanded, setExpanded }) {
         }
     });
 
+    $(document).ready(function () {
+        $('#single-select-province').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+        });
+
+        $('#single-select-province').change(function () {
+            // console.log($(this).val());
+            const selectedProvinceId = $(this).val();
+            setSelected({
+                ...selected,
+                province_id: selectedProvinceId,
+            });
+            const selectedProvince = provinces.find(item => item.id === +selectedProvinceId);
+            setForm({
+                ...form,
+                Province: selectedProvince.name_th
+            });
+        });
+
+        $('#single-select-Curprovince').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+        });
+
+        $('#single-select-Curprovince').change(function () {
+            // console.log($(this).val());
+            const selectedProvinceId = $(this).val();
+            setSelected({
+                ...selected,
+                Curprovince_id: selectedProvinceId,
+            });
+            const selectedProvince = Curprovinces.find(item => item.id === +selectedProvinceId);
+            setForm({
+                ...form,
+                CurProvince: selectedProvince.name_th
+            });
+        });
+    });
+
+    console.log(form);
     return (
         <div style={{ marginTop: "2rem" }}>
             <Card sx={{ padding: "1rem", backgroundColor: "#FAFAFA", borderRadius: "15px" }}>
@@ -230,32 +276,19 @@ function AddressCard({ expanded, setExpanded }) {
                                         จังหวัด <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example"
+                                        <select
+                                            className="form-select"
+                                            id="single-select-province"
                                             value={selected.province_id}
-                                            style={{
-                                                cursor: "pointer",
-                                            }} required
-                                            onChange={e => setSelected({
-                                                ...selected,
-                                                province_id: e.target.value,
-                                            },
-                                                setForm(
-                                                    {
-                                                        ...form, Province: provinces.find(
-                                                            (item) => item.id === +e.target.value
-                                                        ).name_th
-                                                    }
-                                                ))}>
-                                            <option ></option>
-                                            {provinces.map((item) => {
-                                                return (
-                                                    <option key={item.id} value={item.id}
-                                                        id='province_id'>
-                                                        {item.name_th}
-                                                    </option>
-                                                )
-                                            })}
-                                        </Form.Select>
+                                            required
+                                        >
+                                            <option value=""></option>
+                                            {provinces.map(item => (
+                                                <option key={item.id} value={item.id}>
+                                                    {item.name_th}
+                                                </option>
+                                            ))}
+                                        </select>
                                         <Form.Control.Feedback type="invalid">
                                             กรุณาเลือกจังหวัด
                                         </Form.Control.Feedback>
@@ -445,32 +478,19 @@ function AddressCard({ expanded, setExpanded }) {
                                         จังหวัด <span>*</span> :
                                     </Form.Label>
                                     <Col sm="8"  >
-                                        <Form.Select aria-label="Default select example"
+                                        <select
+                                            className="form-select"
+                                            id="single-select-Curprovince"
                                             value={selected.Curprovince_id}
-                                            style={{
-                                                cursor: "pointer",
-                                            }} required
-                                            onChange={e => setSelected({
-                                                ...selected,
-                                                Curprovince_id: e.target.value
-                                            },
-                                                setForm(
-                                                    {
-                                                        ...form, CurProvince: Curprovinces.find(
-                                                            (item) => item.id === +e.target.value
-                                                        ).name_th
-                                                    }
-                                                ))}>
-                                            <option ></option>
-                                            {Curprovinces.map((item) => {
-                                                return (
-                                                    <option key={item.id} value={item.id}
-                                                        id='province_id'>
-                                                        {item.name_th}
-                                                    </option>
-                                                )
-                                            })}
-                                        </Form.Select>
+                                            required
+                                        >
+                                            <option value=""></option>
+                                            {Curprovinces.map(item => (
+                                                <option key={item.id} value={item.id}>
+                                                    {item.name_th}
+                                                </option>
+                                            ))}
+                                        </select>
                                         <Form.Control.Feedback type="invalid">
                                             กรุณาเลือกจังหวัด
                                         </Form.Control.Feedback>
@@ -525,7 +545,7 @@ function AddressCard({ expanded, setExpanded }) {
                                     </Form.Label>
                                     <Col sm="8"  >
                                         <Form.Select aria-label="Default select example"
-                                        value={selected.Curtambon_id}
+                                            value={selected.Curtambon_id}
                                             style={{
                                                 cursor: "pointer",
                                             }} required

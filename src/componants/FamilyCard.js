@@ -120,7 +120,7 @@ function FamilyCard({ expanded, setExpanded }) {
                 setAmphures(District.amphure)
             }
         }
-    });
+    }, []);
     // find sub-district
     useEffect(() => {
         if (selected.amphure_id !== undefined) {
@@ -131,7 +131,7 @@ function FamilyCard({ expanded, setExpanded }) {
                 setTambons(SubDistrict.tambon)
             }
         }
-    });
+    }, []);
     // find zipcode
     useEffect(() => {
         if (selected.tambon_id !== undefined) {
@@ -142,7 +142,7 @@ function FamilyCard({ expanded, setExpanded }) {
                 setZipcodes(ZipCode)
             }
         }
-    });
+    }, []);
     return (
         <div style={{ marginTop: "2rem" }}>
             <Card sx={{
