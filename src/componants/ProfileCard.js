@@ -30,6 +30,7 @@ function ProfileCard({ expanded, setExpanded }) {
     });
 
     const [form, setForm] = useState({
+        // Pro = Profile
         ProNameTH: "",
         ProSurNameTH: "",
         ProNameEN: "",
@@ -84,6 +85,7 @@ function ProfileCard({ expanded, setExpanded }) {
         }),
     }));
 
+    // Fetch Province from API
     useEffect(() => {
         (() => {
             fetch(
@@ -96,6 +98,7 @@ function ProfileCard({ expanded, setExpanded }) {
         })();
     }, []);
 
+    // Select2 for Province
     $(document).ready(function () {
         $('#single-select-field').select2({
             theme: "bootstrap-5",

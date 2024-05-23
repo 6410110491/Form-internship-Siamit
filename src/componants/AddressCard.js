@@ -34,6 +34,7 @@ function AddressCard({ expanded, setExpanded }) {
 
 
     const [form, setForm] = useState({
+        // Address
         HouseNumber: "",
         Moo: "",
         Soi: "",
@@ -43,6 +44,7 @@ function AddressCard({ expanded, setExpanded }) {
         Subdistrict: "",
         Zipcode: "",
 
+        // Current Address
         CurHoseNumber: "",
         CurMoo: "",
         CurSoi: "",
@@ -142,6 +144,7 @@ function AddressCard({ expanded, setExpanded }) {
     });
 
     $(document).ready(function () {
+        // select2 province
         $('#single-select-province').select2({
             theme: "bootstrap-5",
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
@@ -162,6 +165,7 @@ function AddressCard({ expanded, setExpanded }) {
             });
         });
 
+        // select2 Current province
         $('#single-select-Curprovince').select2({
             theme: "bootstrap-5",
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
