@@ -66,7 +66,7 @@ function GeneralCard({ expanded, setExpanded }) {
                         <CardContent>
                             <Row>
                                 <Col sm={12} md={12} lg={6}>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextComSkill">
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
                                             ทักษะการใช้งานคอมพิวเตอร์ สามารถใช้โปรแกรมอะไรได้บ้าง  <span>*</span> :
                                         </Form.Label>
@@ -79,12 +79,12 @@ function GeneralCard({ expanded, setExpanded }) {
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextTarget1">
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             จุดมุ่งหมายงานอาชีพ (ระบุสายงาน/อาชีพที่สนใจ) <span>*</span> :
                                         </Form.Label>
                                     </Form.Group>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextTarget1"
                                     >
                                         <Form.Label column sm="1" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             1 :
@@ -95,7 +95,7 @@ function GeneralCard({ expanded, setExpanded }) {
                                                 onChange={e => setForm({ ...form, Target1: e.target.value })} />
                                         </Col>
                                     </Form.Group>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextTarget2"
                                     >
                                         <Form.Label column sm="1" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             2 :
@@ -106,7 +106,7 @@ function GeneralCard({ expanded, setExpanded }) {
                                                 onChange={e => setForm({ ...form, Target2: e.target.value })} />
                                         </Col>
                                     </Form.Group>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextTarget3"
                                     >
                                         <Form.Label column sm="1" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             3  :
@@ -127,7 +127,7 @@ function GeneralCard({ expanded, setExpanded }) {
                             <Row>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1">
+                                        controlId="exampleForm.ControlTextNewSource">
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
                                             ทราบข่าวการรับสมัครนักศึกษาฝึกงานจากช่องทางใด <span>*</span> :
                                         </Form.Label>
@@ -140,7 +140,7 @@ function GeneralCard({ expanded, setExpanded }) {
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextKnowPerson"
                                         style={{ display: "flex", justifyContent: "center" }}>
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2" }}>
                                             มีผู้ที่รู้จักในบริษัทหรือไม่ ถ้ามี (โปรดระบุ) ชื่อ :
@@ -149,7 +149,7 @@ function GeneralCard({ expanded, setExpanded }) {
                                             value={form.KnowPerson}
                                             onChange={e => setForm({ ...form, KnowPerson: e.target.value })} />
                                     </Form.Group>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword"
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextRelated"
                                         style={{ display: "flex", justifyContent: "center" }}>
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             เกี่ยวข้องเป็น  :
@@ -173,7 +173,7 @@ function GeneralCard({ expanded, setExpanded }) {
                             <Row>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1">
+                                        controlId="exampleForm.ControlTextExpect">
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
                                             สิ่งที่คาดหวังจากการฝึกงาน <span>*</span> :
                                         </Form.Label>
@@ -187,7 +187,7 @@ function GeneralCard({ expanded, setExpanded }) {
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1">
+                                        controlId="exampleForm.ControlTextHelper">
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
                                             ถ้าคุณได้ฝึกงานที่นี่ คุณจะช่วยเหลือหรือพัฒนาอะไร ให้กับสถานที่นี่ <span>*</span> :
                                         </Form.Label>
@@ -204,7 +204,7 @@ function GeneralCard({ expanded, setExpanded }) {
                             <Row>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1">
+                                        controlId="exampleForm.ControlTextHobby">
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
                                             งานอดิเเรก <span>*</span> :
                                         </Form.Label>
@@ -218,7 +218,7 @@ function GeneralCard({ expanded, setExpanded }) {
                                 </Col>
                                 <Col sm={12} md={12} lg={6}>
                                     <Form.Group className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1">
+                                        controlId="exampleForm.ControlTextCharacter">
                                         <Form.Label className='form-lebel' style={{ color: "#1B6BB2", width: "100%" }}>
                                             อุปนิสัย <span>*</span> :
                                         </Form.Label>
@@ -248,7 +248,7 @@ function GeneralCard({ expanded, setExpanded }) {
                             </div>
                             <Row>
                                 <Col sm={12} md={6} lg={6}>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextLineID">
                                         <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             ID Line :
                                         </Form.Label>
@@ -260,7 +260,7 @@ function GeneralCard({ expanded, setExpanded }) {
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={6} lg={6}>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextInstagram">
                                         <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             Instagram :
                                         </Form.Label>
@@ -272,7 +272,7 @@ function GeneralCard({ expanded, setExpanded }) {
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={6} lg={6}>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextFacebook">
                                         <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             Facebook :
                                         </Form.Label>
@@ -284,7 +284,7 @@ function GeneralCard({ expanded, setExpanded }) {
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={6} lg={6}>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextOther">
                                         <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                             อื่นๆ :
                                         </Form.Label>

@@ -218,7 +218,7 @@ function AddressCard({ expanded, setExpanded }) {
                         </div>
                         <Row>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextHouseNumber">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         เลขที่ <span>*</span> :
                                     </Form.Label>
@@ -233,7 +233,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextMoo">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         หมู่ที่ <span>*</span> :
                                     </Form.Label>
@@ -248,7 +248,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextSoi">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         ตรอก/ซอย :
                                     </Form.Label>
@@ -260,7 +260,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextRoad">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ถนน :
                                     </Form.Label>
@@ -274,7 +274,7 @@ function AddressCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextProvince">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         จังหวัด <span>*</span> :
                                     </Form.Label>
@@ -299,7 +299,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextamphures">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         อำเภอ/เขต <span>*</span> :
                                     </Form.Label>
@@ -340,7 +340,7 @@ function AddressCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintexttambons">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ตำบล/แขวง <span>*</span> :
                                     </Form.Label>
@@ -380,7 +380,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextZipcode">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         รหัสไปรษณีย์ <span>*</span> :
                                     </Form.Label>
@@ -397,7 +397,6 @@ function AddressCard({ expanded, setExpanded }) {
                                             style={{
                                                 cursor: "pointer",
                                             }} required>
-                                            <option></option>
                                             <option id='zipcode'>{zipcodes.zip_code}</option>
                                         </Form.Select>
                                         <Form.Control.Feedback type="invalid">
@@ -420,7 +419,7 @@ function AddressCard({ expanded, setExpanded }) {
                         </div>
                         <Row>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCurHoseNumber">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         เลขที่ <span>*</span> :
                                     </Form.Label>
@@ -435,7 +434,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCurMoo">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         หมู่ที่ <span>*</span> :
                                     </Form.Label>
@@ -450,7 +449,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCurSoi">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         ตรอก/ซอย  :
                                     </Form.Label>
@@ -462,7 +461,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCurRoad">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ถนน :
                                     </Form.Label>
@@ -476,7 +475,7 @@ function AddressCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCurprovinces">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         จังหวัด <span>*</span> :
                                     </Form.Label>
@@ -501,7 +500,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCuramphures">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         อำเภอ/เขต <span>*</span> :
                                     </Form.Label>
@@ -542,7 +541,7 @@ function AddressCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCurtambons">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ตำบล/แขวง <span>*</span> :
                                     </Form.Label>
@@ -581,7 +580,7 @@ function AddressCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCurZipcode">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         รหัสไปรษณีย์ <span>*</span> :
                                     </Form.Label>
@@ -598,7 +597,6 @@ function AddressCard({ expanded, setExpanded }) {
                                             style={{
                                                 cursor: "pointer",
                                             }} required>
-                                            <option></option>
                                             <option id='zipcode'>{CurZipcodes.zip_code}</option>
                                         </Form.Select>
                                         <Form.Control.Feedback type="invalid">

@@ -166,7 +166,7 @@ function FamilyCard({ expanded, setExpanded }) {
                     <CardContent>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextDadName">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         บิดา ชื่อ <span>*</span> :
                                     </Form.Label>
@@ -181,7 +181,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextDadSureName">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         นามสกุล <span>*</span> :
                                     </Form.Label>
@@ -196,7 +196,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextDadAge">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         อายุ <span>*</span> :
                                     </Form.Label>
@@ -211,7 +211,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextDadJob">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         อาชีพ <span>*</span> :
                                     </Form.Label>
@@ -228,7 +228,7 @@ function FamilyCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextMomName">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         มารดา ชื่อ <span>*</span> :
                                     </Form.Label>
@@ -243,7 +243,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextMomSureName">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         นามสกุล <span>*</span> :
                                     </Form.Label>
@@ -258,7 +258,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextMomAge">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         อายุ <span>*</span> :
                                     </Form.Label>
@@ -273,7 +273,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextMomJob">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         อาชีพ <span>*</span> :
                                     </Form.Label>
@@ -301,7 +301,7 @@ function FamilyCard({ expanded, setExpanded }) {
                         </div>
                         <Row>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextFamAddr">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         เลขที่ <span>*</span> :
                                     </Form.Label>
@@ -316,7 +316,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextFamMoo">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         หมู่ที่ <span>*</span> :
                                     </Form.Label>
@@ -331,7 +331,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextFamSoi">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         ตรอก/ซอย  :
                                     </Form.Label>
@@ -343,7 +343,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextFamRoad">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ถนน :
                                     </Form.Label>
@@ -357,7 +357,7 @@ function FamilyCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextprovinces">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         จังหวัด :
                                     </Form.Label>
@@ -391,7 +391,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextamphures">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         อำเภอ/เขต :
                                     </Form.Label>
@@ -431,7 +431,7 @@ function FamilyCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintexttambons">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ตำบล/แขวง :
                                     </Form.Label>
@@ -469,7 +469,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextZipcode">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         รหัสไปรษณีย์ :
                                     </Form.Label>
@@ -498,7 +498,7 @@ function FamilyCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextFamPhone">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         โทรศัพท์ <span>*</span> :
                                     </Form.Label>
@@ -527,7 +527,7 @@ function FamilyCard({ expanded, setExpanded }) {
                         </div>
                         <Row>
                             <Col sm={6} md={6} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextFamCount">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         จำนวน <span>*</span> :
                                     </Form.Label>
@@ -542,7 +542,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={6} lg={2}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCountBro">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ชาย <span>*</span> :
                                     </Form.Label>
@@ -557,7 +557,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={6} lg={2}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCountSis">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         หญิง <span>*</span> :
                                     </Form.Label>
@@ -572,7 +572,7 @@ function FamilyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={6} lg={5}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextCountMe">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         ผู้สมัครเป็นคนที่ <span>*</span> :
                                     </Form.Label>

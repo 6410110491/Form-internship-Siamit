@@ -51,7 +51,7 @@ function EmergencyCard({ expanded, setExpanded }) {
                     <CardContent>
                         <Row>
                             <Col sm={12} md={12} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmergenName">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         กรณีฉุกเฉินติดต่อที่ ชื่อ - นามสกุล <span>*</span> :
                                     </Form.Label>
@@ -67,7 +67,7 @@ function EmergencyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={12} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextRelationship">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ความสัมพันธ์ <span>*</span> :
                                     </Form.Label>
@@ -90,7 +90,7 @@ function EmergencyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmergenAddr">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         ที่อยู่ <span>*</span> :
                                     </Form.Label>
@@ -106,7 +106,7 @@ function EmergencyCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmergenPhonenum">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         โทรศัพท์ <span>*</span> :
                                     </Form.Label>

@@ -174,7 +174,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextNameEN">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         Name <span>*</span> :
                                     </Form.Label>
@@ -189,7 +189,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextSurname">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextSurnameEN">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         Surname <span>*</span> :
                                     </Form.Label>
@@ -206,7 +206,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextNickName">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ชื่อเล่น <span>*</span> :
                                     </Form.Label>
@@ -221,7 +221,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPAge">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         อายุ <span>*</span>  :
                                     </Form.Label>
@@ -236,7 +236,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={6} md={3} lg={3}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextStatus">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         สถานะ :
                                     </Form.Label>
@@ -259,7 +259,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextDisease">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         โรคประจำตัว :
                                     </Form.Label>
@@ -279,7 +279,7 @@ function ProfileCard({ expanded, setExpanded }) {
 
                         <Row style={{ marginTop: "3.5rem" }}>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextID">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }} >
                                         เลขประจำตัวประชาชน <span>*</span> :
                                     </Form.Label>
@@ -294,7 +294,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPlace">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         ออกให้ ณ :
                                     </Form.Label>
@@ -309,7 +309,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextGiveDate">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         เมื่อวันที่ :
                                     </Form.Label>
@@ -337,7 +337,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextExpireDate">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         หมดอายุ :
                                     </Form.Label>
@@ -368,7 +368,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                         <Row style={{ marginTop: "1.5rem", marginBottom: "1rem" }}>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextBirthDate">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         วัน/เดือน/ปีเกิด :
                                     </Form.Label>
@@ -396,7 +396,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3 form-province" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3 form-province" controlId="formPlaintextProvince">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         จังหวัดที่เกิด <span>*</span> :
                                     </Form.Label>
@@ -423,7 +423,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextHeight">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ส่วนสูง <span>*</span> :
                                     </Form.Label>
@@ -438,7 +438,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextWWeight">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         น้ำหนัก <span>*</span> :
                                     </Form.Label>
@@ -455,7 +455,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextNationality">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         สัญชาติ <span>*</span> :
                                     </Form.Label>
@@ -470,7 +470,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextReligion">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2", textWrap: "nowrap" }}>
                                         ศาสนา <span>*</span> :
                                     </Form.Label>
@@ -487,7 +487,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextMobile">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         โทรศัพท์มือถือ <span>*</span> :
                                     </Form.Label>
@@ -502,7 +502,7 @@ function ProfileCard({ expanded, setExpanded }) {
                                 </Form.Group>
                             </Col>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextHomephone">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         โทรศัพท์บ้าน :
                                     </Form.Label>
@@ -517,7 +517,7 @@ function ProfileCard({ expanded, setExpanded }) {
                         </Row>
                         <Row>
                             <Col sm={12} md={6} lg={6}>
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextWorkphone">
                                     <Form.Label column sm="4" style={{ color: "#1B6BB2" }}>
                                         โทรศัพท์ที่ทำงาน :
                                     </Form.Label>

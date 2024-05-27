@@ -18,6 +18,8 @@ code {
   font-weight: 300;
 }
 
+
+/* Start Scroll Bar css */
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -43,7 +45,11 @@ code {
   background: #f1f1f1;
 }
 
+/* End Scroll Bar css */
 
+
+
+/* Start Responsive */
 @media screen and (max-width: 576px) {
   .logo-img {
     width: 100px;
@@ -196,7 +202,48 @@ code {
     font-size: 2.75rem;
     font-weight: 300;
   }
+}
 
+/* End Responsive */
+
+
+
+/* Start Global */
+span {
+  color: red;
+  font-size: 1.3rem;
+}
+
+.form-control,
+.form-select,
+.select2-container--bootstrap-5 .select2-selection--single {
+  border-color: rgba(0, 0, 0, 0.23);
+}
+
+.form-control:hover,
+.form-select:hover,
+.select2-container--bootstrap-5 .select2-selection--single:hover {
+  border-color: rgba(0, 0, 0, 0.80);
+}
+
+.MuiCardActions-root:hover {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* End Global */
+
+
+
+/* Start Home Page Css */
+.helper-text-start,
+.helper-text-end {
+  margin-top: .25rem;
+  font-size: .875em;
+  display: block;
+  font-family: "Mitr", sans-serif;
+  color: var(--bs-form-invalid-color);
 }
 
 .MuiFormControl-root.MuiTextField-root.css-11gc0et-MuiFormControl-root-MuiTextField-root {
@@ -207,28 +254,6 @@ code {
 .MuiFormControl-root.MuiTextField-root.css-xtpn3w-MuiFormControl-root-MuiTextField-root {
   min-width: 0;
   width: 100%;
-}
-
-span {
-  color: red;
-  font-size: 1.3rem;
-}
-
-.form-control,
-.form-select {
-  border-color: rgba(0, 0, 0, 0.23);
-}
-
-.MuiCardActions-root:hover {
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.form-control:hover,
-.form-select:hover,
-.select2-container--bootstrap-5 .select2-selection--single:hover {
-  border-color: rgba(0, 0, 0, 0.80);
 }
 
 .button-custom {
@@ -249,6 +274,44 @@ span {
   background-color: #155080;
 }
 
+/* End Home Page Css */
+
+
+
+/* Start Profile Page && Address Page */
+.select2-container--bootstrap-5 .select2-selection--single {
+  background-position: right .75rem center;
+  padding: .375rem .75rem .375rem .75rem;
+}
+
+.select2-container--bootstrap-5 .select2-dropdown {
+  color: #212529;
+  font-weight: 200;
+}
+
+li {
+  color: #000;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+
+.select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--selected,
+.select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option[aria-selected=true]:not(.select2-results__option--highlighted) {
+  color: #fff;
+  background-color: rgba(75, 75, 75, 0.8);
+}
+
+.select2-selection__rendered {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* End Profile Page && Address Page */
+
+
+
+/* Start SuccessPopup Page */
 .popup {
   position: fixed;
   top: 0;
@@ -302,40 +365,4 @@ span {
   }
 }
 
-.helper-text-start,
-.helper-text-end {
-  margin-top: .25rem;
-  font-size: .875em;
-  display: block;
-  font-family: "Mitr", sans-serif;
-  color: var(--bs-form-invalid-color);
-}
-
-
-.select2-container--bootstrap-5 .select2-selection--single {
-  background-position: right .75rem center;
-  padding: .375rem .75rem .375rem .75rem;
-}
-
-.select2-container--bootstrap-5 .select2-dropdown {
-  color: #212529;
-  font-weight: 200;
-}
-
-li {
-  color: #000;
-  font-size: 1.25rem;
-  font-weight: 300;
-}
-
-
-.select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--selected,
-.select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option[aria-selected=true]:not(.select2-results__option--highlighted) {
-  color: #fff;
-  background-color: rgba(75, 75, 75, 0.8);
-}
-
-.select2-selection__rendered {
-  font-size: 1rem;
-  font-weight: 400;
-}
+/* End SuccessPopup Page */
